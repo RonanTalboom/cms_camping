@@ -19,16 +19,6 @@ File structure will be
 Requirements:
 
 usecase
-Naam	Reserveringssysteem Camping La Rustique 
-Samenvatting	De medewerker voert de benodigde informatie in om een nieuwe campingplaats te registreren in het systeem.
-Actor	Medewerker/Manager
-Pre-conditie	De medewerker is ingelogd in het systeem en heeft toegang tot de registratiemodule.
-Main-succes-scenario	"De medewerker navigeert naar de registratiemodule.
-De medewerker voert de benodigde informatie in, zoals locatie, en beschikbaarheid van de campingplaats.
-Het systeem valideert de ingevoerde informatie en registreert de campingplaats in de database.
-"
-Uitzonderingen	Als de ingevoerde informatie onvolledig of incorrect is, wordt de medewerker gevraagd om de juiste gegevens in te voeren.
-Postconditie	De nieuwe campingplaats is succesvol geregistreerd in het systeem.
 
 <img width="457" alt="image" src="https://github.com/RonanTalboom/cms_camping/assets/8617184/fc93dd4a-6909-4717-8cec-ac14bb25a381">
 
@@ -81,20 +71,20 @@ Could have:
 
 
 Dagtarieven Camping La Rustique 
-Volwassene 	5 euro
-Kinderen van 4 tot 12 jaar 	4 euro
-Kinderen tot 4 jaar 	Gratis
-Hond (maximaal 1 huisdier per campingplaats)	2 euro
-Elektriciteit 	2 euro
-Bezoekers	2 euro
-Douche (munten verkrijgbaar bij de receptie)	0,50 euro
-Wasmachine 	6 euro
-Wasdroger	4 euro
-Caravan of camper (kleine plaats) 	2 euro
-Caravan of camper (grote plaats)	4 euro
-Tent (kleine plaats)	3 euro
-Tent (grote plaats)	5 euro
-Auto	3 euro
+- Volwassene 	5 euro
+- Kinderen van 4 tot 12 jaar 	4 euro
+- Kinderen tot 4 jaar 	Gratis
+- Hond (maximaal 1 huisdier per campingplaats)	2 euro
+- Elektriciteit 	2 euro
+- Bezoekers	2 euro
+- Douche (munten verkrijgbaar bij de receptie)	0,50 euro
+- Wasmachine 	6 euro
+- Wasdroger	4 euro
+- Caravan of camper (kleine plaats) 	2 euro
+- Caravan of camper (grote plaats)	4 euro
+- Tent (kleine plaats)	3 euro
+- Tent (grote plaats)	5 euro
+- Auto	3 euro
 
 <img width="457" alt="image" src="https://github.com/RonanTalboom/cms_camping/assets/8617184/2a40fdc1-6027-4a1d-a9c4-5ab49be553b7">
 
