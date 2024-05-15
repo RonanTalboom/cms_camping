@@ -3,16 +3,16 @@ CMS system for a camping.
 Repistory for a camping website that is written in JS, PHP and uses SQL as their database.
 File structure will be
 
-/admin
-/css
-/js
-/includes'
-  /languages
-  header.php
-  footer.php
-  logout.php
-  db.php
-login.php
+- /admin
+- /css
+- /js
+- /includes'
+  - /languages
+  - header.php
+  - footer.php
+  - logout.php
+  - db.php
+- login.php
 
 
 
@@ -35,21 +35,21 @@ Postconditie	De nieuwe campingplaats is succesvol geregistreerd in het systeem.
 
 
 Functies
-Inlogfunctie voor medewerkers en leidinggevenden 
-Medewerkers/leidinggevenden invoeren 
-Medewerkers/leidinggevenden wijzigen 
-Medewerkers/leidinggevenden verwijderen 
-Medewerkers/leidinggevenden overzicht  Klantgegevens invoeren 
-Klantopties invoeren 
-Reserveringsgegevens invoeren (denk aan campingplaats, datum aankomst/vertrek) 
-Reserveringsoverzicht (je kunt onderscheid maken tussen open en gesloten reserveringen) 
-Voorkomen van dubbele reserveringen 
-Reservering wijzigen  
-Reservering verwijderen 
-Overzicht van campingplaatsen* 
-Overzicht van tarieven* 
-Afdrukken factuur klant  
-Overzicht van alle inkomsten uit de reserveringen (alleen zichtbaar voor leidinggevenden)   
+- Inlogfunctie voor medewerkers en leidinggevenden 
+- Medewerkers/leidinggevenden invoeren 
+- Medewerkers/leidinggevenden wijzigen 
+- Medewerkers/leidinggevenden verwijderen 
+- Medewerkers/leidinggevenden overzicht  Klantgegevens invoeren 
+- Klantopties invoeren 
+- Reserveringsgegevens invoeren (denk aan campingplaats, datum aankomst/vertrek) 
+- Reserveringsoverzicht (je kunt onderscheid maken tussen open en gesloten reserveringen) 
+- Voorkomen van dubbele reserveringen 
+- Reservering wijzigen  
+- Reservering verwijderen 
+- Overzicht van campingplaatsen* 
+- Overzicht van tarieven* 
+- Afdrukken factuur klant  
+- Overzicht van alle inkomsten uit de reserveringen (alleen zichtbaar voor leidinggevenden)   
 
 *optioneel is een pagina van campingplaatsen en of tarieven.
 
