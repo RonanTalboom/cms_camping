@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST["password"];
     // Prepare SQL statement to prevent SQL injection
     $stmt = $conn->prepare(
-        "SELECT id FROM admins WHERE email = ? AND wachtwoord = ?"
+        "SELECT id FROM medewerkers WHERE email = ? AND wachtwoord = ? AND manager = 1"
     );
     $stmt->bind_param("ss", $email, $password);
 
@@ -77,7 +77,7 @@ return true;
 				<div class="row">
 					<div class="col-md-12">
 
-						<h2 class="page-title">User Login </h2>
+						<h2 class="page-title">Admin Login </h2>
 
 						<div class="row">
 					<div class="col-md-6 col-md-offset-3">
