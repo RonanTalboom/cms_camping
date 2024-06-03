@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST["password"];
     // Prepare SQL statement to prevent SQL injection
     $stmt = $conn->prepare(
-        "SELECT id FROM medewerkers WHERE email = ? AND wachtwoord = ? AND manager = 1"
+        "SELECT medewerkerID FROM medewerkers WHERE email = ? AND wachtwoord = ? AND manager = 1"
     );
     $stmt->bind_param("ss", $email, $password);
 
@@ -20,6 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->fetch(); // Fetch the result
         //  authentication successful, store user details in session
         $_SESSION["admin_id"] = $id;
+        $_SESSION["id"] = $id;
         $_SESSION["email"] = $email;
 
         header("location:dashboard.php"); // Redirect to a secure page
@@ -68,9 +69,9 @@ return true;
 </script>
 </head>
 <body>
-	<?php include "includes/header.php"; ?>
+	<?php include "../includes/header.php"; ?>
 	<div class="ts-main-content">
-		<?php include "includes/sidebar.php"; ?>
+		<?php include "../includes/sidebar.php"; ?>
 		<div class="content-wrapper">
 			<div class="container-fluid">
 
