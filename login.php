@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$email = $_POST['email'];
 	$password = $_POST['password'];
 	// Prepare SQL statement to prevent SQL injection
-	$stmt = $conn->prepare("SELECT medewerkerID FROM medewerkers WHERE email = ? AND wachtwoord = ?");
+	$stmt = $conn->prepare("SELECT medewerkerID, manager FROM medewerkers WHERE email = ? AND wachtwoord = ?");
 	$stmt->bind_param("ss", $email, $password);
 
 	$stmt->execute(); // Execute the query
@@ -20,6 +20,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		//  authentication successful, store user details in session
 		$_SESSION['id'] = $id;
 		$_SESSION['email'] = $email;
+		if ($_SESSION['manager'] == 1){
+			$_SESSION['admin_id'] = $id;
+		}
+
 
 		header("location: dashboard.php"); // Redirect to a secure page
 		exit(); // Always exit after a header redirect

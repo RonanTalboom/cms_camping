@@ -2,8 +2,7 @@
 session_start();
 include "includes/config.php";
 include "includes/checklogin.php";
-check_admin_login();
-//code for add courses
+check_login();
 if (isset($_POST["submit"])) {
 	$naam = $_POST["naam"];
 	$email = $_POST["email"];
@@ -43,80 +42,78 @@ if (isset($_POST["submit"])) {
 </head>
 
 <body>
-	<?php include "includes/header.php"; ?>
-	<div class="ts-main-content">
-		<?php include "includes/sidebar.php"; ?>
-		<div class="content-wrapper">
-			<div class="container-fluid">
+	<div class="container-fluid">
+		<div class="row">
+			<?php include "includes/sidebar.php"; ?>
+			<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+				<div class="container-fluid">
 
-				<div class="row">
-					<div class="col-md-12">
+					<div class="row">
+						<div class="col-md-12">
 
-						<h2 class="page-title">Edit Klant </h2>
 
-						<div class="row">
-							<div class="col-md-12">
-								<div class="panel panel-default">
-									<div class="panel-heading">
-										Register Klant</div>
-									<div class="panel-body">
-										<form method="post" class="form-horizontal">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											Register Klant</div>
+										<div class="panel-body">
+											<form method="post" class="form-horizontal">
 
-											<div class="hr-dashed"></div>
+												<div class="hr-dashed"></div>
 
-											<div class="form-group">
-												<label class="col-sm-2 control-label">Naam</label>
-												<div class="col-sm-8">
-													<input type="text" class="form-control" name="naam" id="naam" required="required">
+												<div class="form-group">
+													<label class="col-sm-2 control-label">Naam</label>
+													<div class="col-sm-8">
+														<input type="text" class="form-control" name="naam" id="naam" required="required">
+													</div>
 												</div>
-											</div>
-											<div class="form-group">
-												<label class="col-sm-2 control-label">Email</label>
-												<div class="col-sm-8">
-													<input type="text" class="form-control" name="email">
+												<div class="form-group">
+													<label class="col-sm-2 control-label">Email</label>
+													<div class="col-sm-8">
+														<input type="text" class="form-control" name="email">
+													</div>
 												</div>
-											</div>
-											<div class="form-group">
-												<label class="col-sm-2 control-label">Telefoon</label>
-												<div class="col-sm-8">
-													<input type="text" class="form-control" name="telefoon">
+												<div class="form-group">
+													<label class="col-sm-2 control-label">Telefoon</label>
+													<div class="col-sm-8">
+														<input type="text" class="form-control" name="telefoon">
+													</div>
 												</div>
-											</div>
 
-											<div class="form-group">
-												<label class="col-sm-2 control-label">Adres</label>
-												<div class="col-sm-8">
-													<input type="text" class="form-control" name="adres">
+												<div class="form-group">
+													<label class="col-sm-2 control-label">Adres</label>
+													<div class="col-sm-8">
+														<input type="text" class="form-control" name="adres">
+													</div>
 												</div>
-											</div>
 
 
-											<div class="col-sm-8 col-sm-offset-2">
+												<div class="col-sm-8 col-sm-offset-2">
 
-												<input class="btn btn-primary" type="submit" name="submit" value="Register">
-											</div>
+													<input class="btn btn-primary" type="submit" name="submit" value="Register">
+												</div>
+										</div>
+
+										</form>
+
 									</div>
-
-									</form>
-
 								</div>
+
+
 							</div>
 
 
+
+
 						</div>
-
-
-
-
 					</div>
+
 				</div>
+			</main>
 
-			</div>
+
 		</div>
-
-
-	</div>
-	</div>
 	</div>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap-select.min.js"></script>

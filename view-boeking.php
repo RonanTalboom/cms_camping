@@ -116,161 +116,148 @@ if (isset($_POST["submit"])) {
 </head>
 
 <body>
-    <?php include "includes/header.php"; ?>
-    <div class="ts-main-content">
-        <?php include "includes/sidebar.php"; ?>
-        <div class="content-wrapper">
-            <div class="container-fluid">
+    <div class="container-fluid">
+        <div class="row">
+            <?php include "includes/sidebar.php"; ?>
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="container-fluid">
 
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <?php
-                                        $boekingID = $_GET["id"];
-                                        $query = "SELECT plaats_boekingen.plaats_id, boekingen.boekingID, boekingen.klantID, boekingen.checkin_datum, boekingen.checkuit_datum, tarieven.kosten 
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <?php
+                                            $boekingID = $_GET["id"];
+                                            $query = "SELECT plaats_boekingen.plaats_id, boekingen.boekingID, boekingen.klantID, boekingen.checkin_datum, boekingen.checkuit_datum, tarieven.kosten 
                                         FROM plaats_boekingen 
                                         INNER JOIN boekingen ON plaats_boekingen.boeking_id = boekingen.boekingID 
                                         INNER JOIN boeking_tarieven ON boekingen.boekingID = boeking_tarieven.boekingID 
                                         INNER JOIN tarieven ON boeking_tarieven.tariefID = tarieven.ID
                                         WHERE boekingen.boekingID = ?";
-                                        $stmt = $conn->prepare($query);
-                                        $stmt->bind_param("i", $boekingID);
-                                        $stmt->execute();
-                                        $res = $stmt->get_result();
-                                        $row = $res->fetch_object();
-                                        if ($row) {
-                                            // Access the data in $row here
-                                        ?>
-                                            <h2>Reservering #<?php echo $row->boekingID; ?> </h2>
-                                    </div>
-                                    <div class="panel-body">
-                                        <dl class="row">
-                                            <dt class="col-sm-3">Check In Tijd</dt>
-                                            <dd class="col-sm-9">
-                                                <?php echo $row->checkin_datum; ?>
-                                            </dd>
-                                            <dt class="col-sm-3">Check Out Tijd</dt>
-                                            <dd class="col-sm-9">
-                                                <?php echo $row->checkuit_datum; ?>
-                                            </dd>
-                                            <dt class="col-sm-3">Kosten</dt>
-                                            <dd class="col-sm-9">
+                                            $stmt = $conn->prepare($query);
+                                            $stmt->bind_param("i", $boekingID);
+                                            $stmt->execute();
+                                            $res = $stmt->get_result();
+                                            $row = $res->fetch_object();
+                                            if ($row) {
+                                                // Access the data in $row here
+                                            ?>
+                                                <h2>Reservering #<?php echo $row->boekingID; ?> </h2>
+                                        </div>
+                                        <div class="panel-body">
+                                            <dl class="row">
+                                                <dt class="col-sm-3">Check In Tijd</dt>
+                                                <dd class="col-sm-9">
+                                                    <?php echo $row->checkin_datum; ?>
+                                                </dd>
+                                                <dt class="col-sm-3">Check Out Tijd</dt>
+                                                <dd class="col-sm-9">
+                                                    <?php echo $row->checkuit_datum; ?>
+                                                </dd>
+                                                <dt class="col-sm-3">Kosten</dt>
+                                                <dd class="col-sm-9">
 
-                                               <dl class="row">
-                                                    <?php
-                                                    $query = "SELECT tarieven.beschrijving, tarieven.kosten FROM tarieven 
+                                                    <dl class="row">
+                                                        <?php
+                                                        $query = "SELECT tarieven.beschrijving, tarieven.kosten FROM tarieven 
                                                     INNER JOIN boeking_tarieven ON tarieven.ID = boeking_tarieven.tariefID 
                                                     WHERE boeking_tarieven.boekingID = ?";
-                                                    $stmt = $conn->prepare($query);
-                                                    $stmt->bind_param("i", $boekingID);
-                                                    $stmt->execute();
-                                                    $res = $stmt->get_result();
-                                                    $total = 0;
-                                                    while ($kosten = $res->fetch_object()) {
-                                                    ?>
-                                                        <dt class="col-sm-3">Beschrijving</dt>
+                                                        $stmt = $conn->prepare($query);
+                                                        $stmt->bind_param("i", $boekingID);
+                                                        $stmt->execute();
+                                                        $res = $stmt->get_result();
+                                                        $total = 0;
+                                                        while ($kosten = $res->fetch_object()) {
+                                                        ?>
+                                                            <dt class="col-sm-3">Beschrijving</dt>
+                                                            <dd class="col-sm-9">
+                                                                <?php echo $kosten->beschrijving; ?>
+                                                            </dd>
+                                                            <dt class="col-sm-3">Kosten</dt>
+                                                            <dd class="col-sm-9">
+                                                                €<?php echo $kosten->kosten; ?>
+                                                            </dd>
+                                                        <?php
+                                                            $total += $kosten->kosten;
+                                                        }
+
+                                                        ?>
+                                                        <dt class="col-sm-3">Totaal</dt>
                                                         <dd class="col-sm-9">
-                                                            <?php echo $kosten->beschrijving; ?>
-                                                        </dd>
-                                                        <dt class="col-sm-3">Kosten</dt>
+                                                            €<?php echo $total; ?>
+                                                    </dl>
+                                                </dd>
+                                                <dt class="col-sm-3">Plaats informatie</dt>
+                                                <dd class="col-sm-9">
+                                                    <dl class="row">
+                                                        <?php
+                                                        $query = "SELECT naam FROM plaatsen WHERE ID=?";
+                                                        $stmt = $conn->prepare($query);
+                                                        $stmt->bind_param("i", $row->plaats_id);
+                                                        $stmt->execute();
+                                                        $res = $stmt->get_result();
+                                                        $plaats = $res->fetch_object();
+
+                                                        ?>
+                                                        <dt class="col-sm-3">Naam</dt>
                                                         <dd class="col-sm-9">
-                                                            €<?php echo $kosten->kosten; ?>
+                                                            <?php echo $plaats->naam; ?>
                                                         </dd>
-                                                    <?php 
-                                                    $total += $kosten->kosten;
-                                                    }    
-                                                
-                                                    ?>
-                                                    <dt class="col-sm-3">Totaal</dt>
-                                                    <dd class="col-sm-9">
-                                                        €<?php echo $total; ?>
-                                                </dl>
-                                            </dd>
-                                            <dt class="col-sm-3">Plaats informatie</dt>
-                                            <dd class="col-sm-9">
-                                                <dl class="row">
-                                                    <?php
-                                                    $query = "SELECT naam FROM plaatsen WHERE ID=?";
-                                                    $stmt = $conn->prepare($query);
-                                                    $stmt->bind_param("i", $row->plaats_id);
-                                                    $stmt->execute();
-                                                    $res = $stmt->get_result();
-                                                    $plaats = $res->fetch_object();
+                                                        <dt class="col-sm-3">Groot</dt>
+                                                        <dd class="col-sm-9">
+                                                            <?php if ($plaats->groot === 1) {
+                                                                echo "Yes";
+                                                            } else {
+                                                                echo "No";
+                                                            }  ?>
+                                                        </dd>
 
-                                                    ?>
-                                                    <dt class="col-sm-3">Naam</dt>
-                                                    <dd class="col-sm-9">
-                                                        <?php echo $plaats->naam; ?>
-                                                    </dd>
-                                                    <dt class="col-sm-3">Groot</dt>
-                                                    <dd class="col-sm-9">
-                                                        <?php if ($plaats->groot === 1) {
-                                                            echo "Yes";
-                                                        } else {
-                                                            echo "No";
-                                                        }  ?>
-                                                    </dd>
+                                                    </dl>
+                                                </dd>
+                                                <dt class="col-sm-3">Klant informatie</dt>
+                                                <dd class="col-sm-9">
+                                                    <dl class="row">
+                                                        <?php
+                                                        $query = "SELECT * FROM klant WHERE klantID=?";
+                                                        $stmt = $conn->prepare($query);
+                                                        $stmt->bind_param("i", $row->klantID);
+                                                        $stmt->execute();
+                                                        $res = $stmt->get_result();
+                                                        $klant = $res->fetch_object();
 
-                                                </dl>
-                                            </dd>
-                                            <dt class="col-sm-3">Klant informatie</dt>
-                                            <dd class="col-sm-9">
-                                                <dl class="row">
-                                                    <?php
-                                                    $query = "SELECT * FROM klant WHERE klantID=?";
-                                                    $stmt = $conn->prepare($query);
-                                                    $stmt->bind_param("i", $row->klantID);
-                                                    $stmt->execute();
-                                                    $res = $stmt->get_result();
-                                                    $klant = $res->fetch_object();
+                                                        ?>
+                                                        <dt class="col-sm-3">naam</dt>
+                                                        <dd class="col-sm-9">
+                                                            <?php echo $klant->naam; ?>
+                                                        </dd>
+                                                        <dt class="col-sm-3">Email</dt>
+                                                        <dd class="col-sm-9">
+                                                            <?php echo $klant->email; ?>
+                                                        </dd>
+                                                        <dt class="col-sm-3">Telefoon</dt>
+                                                        <dd class="col-sm-9">
+                                                            <?php echo $klant->telefoon; ?>
+                                                        </dd>
+                                                        <dt class="col-sm-3">Adres</dt>
+                                                        <dd class="col-sm-9">
+                                                            <?php echo $klant->adres; ?>
+                                                        </dd>
+                                                    </dl>
+                                            </dl>
 
-                                                    ?>
-                                                    <dt class="col-sm-3">naam</dt>
-                                                    <dd class="col-sm-9">
-                                                        <?php echo $klant->naam; ?>
-                                                    </dd>
-                                                    <dt class="col-sm-3">Email</dt>
-                                                    <dd class="col-sm-9">
-                                                        <?php echo $klant->email; ?>
-                                                    </dd>
-                                                    <dt class="col-sm-3">Telefoon</dt>
-                                                    <dd class="col-sm-9">
-                                                        <?php echo $klant->telefoon; ?>
-                                                    </dd>
-                                                    <dt class="col-sm-3">Adres</dt>
-                                                    <dd class="col-sm-9">
-                                                        <?php echo $klant->adres; ?>
-                                                    </dd>
-                                                </dl>
-                                        </dl>
-
-                                    <?php }
-                                    ?>
+                                        <?php }
+                                        ?>
+                                        </div>
                                     </div>
-
-                                    </form>
-
                                 </div>
                             </div>
-
-
                         </div>
-
-
-
-
                     </div>
                 </div>
-
-            </div>
+            </main>
         </div>
-
-
-    </div>
-    </div>
     </div>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap-select.min.js"></script>
