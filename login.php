@@ -15,17 +15,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	// Check if the user exists
 	if ($stmt->num_rows == 1) {
 
-		$stmt->bind_result($id); // Bind the result to variables
+		$stmt->bind_result($id, $manager); // Bind the result to variables
 		$stmt->fetch(); // Fetch the result
 		//  authentication successful, store user details in session
 		$_SESSION['id'] = $id;
 		$_SESSION['email'] = $email;
-		if ($_SESSION['manager'] == 1){
+		if ($manager == 1){
 			$_SESSION['admin_id'] = $id;
 		}
 
 
-		header("location: dashboard.php"); // Redirect to a secure page
+		header("location:dashboard.php"); // Redirect to a secure page
 		exit(); // Always exit after a header redirect
 	} else {
 		// Authentication failed, display an error message
@@ -89,7 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 					<form action="" class="mt" method="post">
 						<div class="form-floating">
 							<label for="" class="text-uppercase text-sm">Email</label>
-							<input type="text" placeholder="Email" name="email" class="form-control mb">
+							<input type="email" placeholder="Email" name="email" class="form-control mb">
 						</div>
 						<div class="form-floating">
 							<label for="" class="text-uppercase text-sm">Password</label>

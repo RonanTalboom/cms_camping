@@ -120,6 +120,8 @@ if (isset($_POST["submit"])) {
     <script src="js/fileinput.js"></script>
     <script src="js/chartData.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/sidebar.js"></script>
+	<script src="js/bootstrap.bundle.min.js"></script>
 
     </script>
 </body>

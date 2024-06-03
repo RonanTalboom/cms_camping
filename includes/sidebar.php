@@ -21,8 +21,8 @@
 
 		<?php } else { ?>
 
-			<li><a class="nav-link link-dark" href="login.php"><i class="fa fa-users"></i> User Login</a></li>
-			<li><a class="nav-link link-dark" href="admin"><i class="fa fa-user"></i> Admin Login</a></li>
+			<li><a class="nav-link link-dark" href="login.php"><i class="fa fa-users"></i>Login</a></li>
+			
 		<?php } ?>
 	</ul>
 	<?php if (
