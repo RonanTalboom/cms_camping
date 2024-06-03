@@ -1,7 +1,7 @@
 <?php
 session_start();
-include "../includes/config.php";
-include "../includes/checklogin.php";
+include "includes/config.php";
+include "includes/checklogin.php";
 check_admin_login();
 //code for add courses
 if (isset($_POST["submit"])) {
@@ -9,9 +9,9 @@ if (isset($_POST["submit"])) {
     $naam = $_POST["naam"];
     $groot = $_POST["groot"];
     $grooti = 0;
-	if ($groot) {
-		$grooti = 1;
-	}
+    if ($groot) {
+        $grooti = 1;
+    }
 
 
     $query =
@@ -25,7 +25,7 @@ if (isset($_POST["submit"])) {
     );
     $stmt->execute();
     echo "<script>alert('Plaats has been created');</script>";
-    header("location: ../plaatsen.php");
+    header("location: plaatsen.php");
 }
 ?>
 <!doctype html>
@@ -39,88 +39,87 @@ if (isset($_POST["submit"])) {
     <meta name="author" content="">
     <meta name="theme-color" content="#3e454c">
     <title>Nieuw Plaats</title>
-    <link rel="stylesheet" href="../css/font-awesome.min.css">
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/dataTables.bootstrap.min.css">
-    <link rel="stylesheet" href="../css/bootstrap-social.css">
-    <link rel="stylesheet" href="../css/bootstrap-select.css">
-    <link rel="stylesheet" href="../css/fileinput.min.css">
-    <link rel="stylesheet" href="../css/awesome-bootstrap-checkbox.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-social.css">
+    <link rel="stylesheet" href="css/bootstrap-select.css">
+    <link rel="stylesheet" href="css/fileinput.min.css">
+    <link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css">
+    <link rel="stylesheet" href="css/style.css">
     <script type="text/javascript" src="js/jquery-1.11.3-jquery.min.js"></script>
     <script type="text/javascript" src="js/validation.min.js"></script>
 </head>
 
 <body>
-    <?php include "../includes/header.php"; ?>
-    <div class="ts-main-content">
-        <?php include "../includes/sidebar.php"; ?>
-        <div class="content-wrapper">
-            <div class="container-fluid">
+    <div class="container-fluid">
+        <div class="row">
+            <?php include "includes/sidebar.php"; ?>
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="container-fluid">
 
-                <div class="row">
-                    <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-12">
 
-                        <h2 class="page-title">Nieuw Plaats </h2>
+                            <h2 class="page-title">Nieuw Plaats </h2>
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        Register Plaats</div>
-                                    <div class="panel-body">
-                                        <form method="post" class="form-horizontal">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            Register Plaats</div>
+                                        <div class="panel-body">
+                                            <form method="post" class="form-horizontal">
 
-                                            <div class="hr-dashed"></div>
+                                                <div class="hr-dashed"></div>
 
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label">Naam</label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" class="form-control" name="naam" required="required">
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">Naam</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" class="form-control" name="naam" required="required">
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label">Beschrijving</label>
-                                                <div class="col-sm-8">
-                                                    <textarea type="text" class="form-control" name="beschrijving" required="required"></textarea>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">Beschrijving</label>
+                                                    <div class="col-sm-8">
+                                                        <textarea type="text" class="form-control" name="beschrijving" required="required"></textarea>
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="form-check">
-													<input class="form-check-input" type="checkbox" name="groot" id="groot">
-													<label class="form-check-label" for="groot">
-														Kleine / Grote plaats
-													</label>
-												</div>
-                                            
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" name="groot" id="groot">
+                                                    <label class="form-check-label" for="groot">
+                                                        Kleine / Grote plaats
+                                                    </label>
+                                                </div>
 
 
-                                            <div class="col-sm-8 col-sm-offset-2">
 
-                                                <input class="btn btn-primary" type="submit" name="submit" value="Register">
-                                            </div>
+                                                <div class="col-sm-8 col-sm-offset-2">
+
+                                                    <input class="btn btn-primary" type="submit" name="submit" value="Register">
+                                                </div>
+                                        </div>
+
+                                        </form>
+
                                     </div>
-
-                                    </form>
-
                                 </div>
+
+
                             </div>
 
 
+
+
                         </div>
-
-
-
-
                     </div>
+
                 </div>
 
-            </div>
-        </div>
 
-
-    </div>
+        </main>
     </div>
     </div>
     <script src="js/jquery.min.js"></script>
@@ -132,6 +131,8 @@ if (isset($_POST["submit"])) {
     <script src="js/fileinput.js"></script>
     <script src="js/chartData.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/sidebar.js"></script>
+	<script src="js/bootstrap.bundle.min.js"></script>
 
     </script>
 </body>

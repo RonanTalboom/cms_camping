@@ -34,7 +34,7 @@ check_admin_login();
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-md-8">
-							<h2 class="page-title" style="margin-top:4%">Tarieven Camping le qrukoe</h2>
+							<h2 class="page-title">Tarieven Camping le qrukoe</h2>
 						</div>
 						<div class="col-md-4">
 							<a href="register-tarief.php" class="btn btn-primary">Voeg Tarief Toe</a>
@@ -43,7 +43,6 @@ check_admin_login();
 					<div class="row">
 						<div class="col-md-12">
 							<div class="panel panel-default">
-								<div class="panel-heading">Tarieven</div>
 								<div class="panel-body">
 									<table id="zctb" class="display table table-striped table-bordered table-hover" cellspacing="0" width="100%">
 										<thead>

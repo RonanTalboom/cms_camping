@@ -12,7 +12,7 @@ function check_login()
         if (strlen($_SESSION["id"]) == 0) {
             header("Location:logout.php");
         } else {
-            header("Location:dashboard.php");
+            header("Location:boekingen.php");
         }
     }
 }

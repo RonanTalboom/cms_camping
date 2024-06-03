@@ -71,7 +71,7 @@ if (isset($_POST["submit"])) {
 												<div class="form-group">
 													<label class="col-sm-2 control-label">Email</label>
 													<div class="col-sm-8">
-														<input type="text" class="form-control" name="email">
+														<input type="email" class="form-control" name="email">
 													</div>
 												</div>
 												<div class="form-group">
@@ -124,6 +124,8 @@ if (isset($_POST["submit"])) {
 	<script src="js/fileinput.js"></script>
 	<script src="js/chartData.js"></script>
 	<script src="js/main.js"></script>
+	<script src="js/sidebar.js"></script>
+	<script src="js/bootstrap.bundle.min.js"></script>
 
 	</script>
 </body>
