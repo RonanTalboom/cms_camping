@@ -5,17 +5,16 @@ include "../includes/checklogin.php";
 check_admin_login();
 //code for add courses
 if (isset($_POST["submit"])) {
-	$naam = $_POST["naam"];
-	$email = $_POST["email"];
-	$telefoon = $_POST["telefoon"];
+	$beschrijving = $_POST["beschrijving"];
+	$kosten = $_POST["kosten"];
 	$id = $_GET["id"];
 	$query =
-		"update medewerkers set naam=?,email=?,telefoon=? where medewerkerID=?";
+		"update tarieven set beschrijving=?,kosten=? where ID=?";
 	$stmt = $conn->prepare($query);
-	$rc = $stmt->bind_param("sssi", $naam, $email, $telefoon, $id);
+	$rc = $stmt->bind_param("sdi", $beschrijving, $kosten, $id);
 	$stmt->execute();
-	echo "<script>alert('medewerker has been Updated successfully');</script>";
-	header("location:medewerkers.php");
+	echo "<script>alert('tarief has been Updated successfully');</script>";
+	header("location:tarieven.php");
 }
 ?>
 <!doctype html>
@@ -28,7 +27,7 @@ if (isset($_POST["submit"])) {
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<meta name="theme-color" content="#3e454c">
-	<title>Edit Medewerker</title>
+	<title>Edit Tarief</title>
 	<link rel="stylesheet" href="../css/font-awesome.min.css">
 	<link rel="stylesheet" href="../css/bootstrap.min.css">
 	<link rel="stylesheet" href="../css/dataTables.bootstrap.min.css">
@@ -51,17 +50,16 @@ if (isset($_POST["submit"])) {
 				<div class="row">
 					<div class="col-md-12">
 
-						<h2 class="page-title">Edit Medewerker </h2>
 
 						<div class="row">
 							<div class="col-md-12">
 								<div class="panel panel-default">
-									<div class="panel-heading">Edit Medewerker</div>
+									<div class="panel-heading">Edit Tarief</div>
 									<div class="panel-body">
 										<form method="post" class="form-horizontal">
 											<?php
 											$id = $_GET["id"];
-											$ret = "select * from medewerkers where medewerkerID=?";
+											$ret = "select * from tarieven where ID=?";
 											$stmt = $conn->prepare($ret);
 											$stmt->bind_param("i", $id);
 											$stmt->execute(); //ok
@@ -71,27 +69,23 @@ if (isset($_POST["submit"])) {
 												<div class="form-group">
 													<label class="col-sm-2 control-label">ID </label>
 													<div class="col-sm-8">
-														<input type="text" name="cc" value="<?php echo $row->medewerkerID; ?>" class="form-control" disabled>
+														<input type="text" name="cc" value="<?php echo $row->ID; ?>" class="form-control" disabled>
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="col-sm-2 control-label">Naam</label>
+													<label class="col-sm-2 control-label">Beschrijving</label>
 													<div class="col-sm-8">
-														<input type="text" class="form-control" name="naam" id="naam" value="<?php echo $row->naam; ?>" required="required">
+														<input type="text" class="form-control" name="beschrijving" id="beschrijving" value="<?php echo $row->beschrijving; ?>" required="required">
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="col-sm-2 control-label">Email</label>
-													<div class="col-sm-8">
-														<input type="text" class="form-control" name="email" value="<?php echo $row->email; ?>">
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="col-sm-2 control-label">Telefoon</label>
-													<div class="col-sm-8">
-														<input type="text" class="form-control" name="telefoon" value="<?php echo $row->telefoon; ?>">
-													</div>
-												</div>
+                                                <label class="col-sm-2 control-label">Kosten in E</label>
+                                                <div class="col-sm-8">
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text">€</span>
+                                                        <input type="number" step="0.01" class="form-control" name="kosten" value="<?php echo $row->kosten; ?>">
+                                                    </div>
+                                                </div>
 
 
 											<?php }
