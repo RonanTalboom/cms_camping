@@ -1,8 +1,8 @@
 <?php
 session_start();
-include "../includes/config.php";
-include "../includes/checklogin.php";
-check_admin_login();
+include "includes/config.php";
+include "includes/checklogin.php";
+check_login();
 ?>
 <!doctype html>
 <html lang="en" class="no-js">
@@ -15,30 +15,30 @@ check_admin_login();
 	<meta name="author" content="">
 	<meta name="theme-color" content="#3e454c">
 	<title>My Complaints</title>
-	<link rel="stylesheet" href="../css/font-awesome.min.css">
-	<link rel="stylesheet" href="../css/bootstrap.min.css">
-	<link rel="stylesheet" href="../css/dataTables.bootstrap.min.css">
-	<link rel="stylesheet" href="../css/bootstrap-social.css">
-	<link rel="stylesheet" href="../css/bootstrap-select.css">
-	<link rel="stylesheet" href="../css/fileinput.min.css">
-	<link rel="stylesheet" href="../css/awesome-bootstrap-checkbox.css">
-	<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
+	<link rel="stylesheet" href="css/bootstrap-social.css">
+	<link rel="stylesheet" href="css/bootstrap-select.css">
+	<link rel="stylesheet" href="css/fileinput.min.css">
+	<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css">
+	<link rel="stylesheet" href="css/style.css">
 
 </head>
 
 <body>
-	<?php include "../includes/header.php"; ?>
+	<?php include "includes/header.php"; ?>
 
 	<div class="ts-main-content">
-			<?php include "../includes/sidebar.php"; ?>
+			<?php include "includes/sidebar.php"; ?>
 		<div class="content-wrapper">
 			<div class="container-fluid">
 			    <div class="row">
                     <div class="col-md-8">
-                        <h2 class="page-title" style="margin-top:4%">Medewerkers Camping le qrukoe</h2>
+                        <h2 class="page-title" style="margin-top:4%">Klanten</h2>
                     </div>
                     <div class="col-md-4">
-                        <a href="register-medewerker.php" class="btn btn-primary">Voeg Medewerker Toe</a>
+                        <a href="register-klant.php" class="btn btn-primary">Voeg Klant Toe</a>
                     </div>
 			    </div>
 				<div class="row">
@@ -53,7 +53,7 @@ check_admin_login();
 											<th>Naam</th>
 											<th>Email</th>
 											<th>Telefoon</th>
-											<th>Manager</th>
+											<th>Adres</th>
 											<th>Action</th>
 										</tr>
 									</thead>
@@ -63,30 +63,26 @@ check_admin_login();
     										<th>Naam</th>
     										<th>Email</th>
     										<th>Telefoon</th>
-    										<th>Manager</th>
+    										<th>Adres</th>
     										<th>Action</th>
 										</tr>
 									</tfoot>
 									<tbody>
 <?php
-$ret = "SELECT * FROM medewerkers";
+$ret = "SELECT * FROM klant";
 $stmt = $conn->prepare($ret);
 $stmt->execute(); //ok
 $res = $stmt->get_result();
 while ($row = $res->fetch_object()) { ?>
-<td><?php echo $row->medewerkerID; ?></td>
+<td><?php echo $row->klantID; ?></td>
 <td><?php echo $row->naam; ?></td>
 <td><?php echo $row->email; ?></td>
-<td><?php echo $row->telefoon; ?></td>
-<td><?php if ($row->manager === 1) {
-    echo "Yes";
-} else {
-    echo "No";
-} ?></td>
+<td><?php echo $row->tel; ?></td>
+<td><?php echo $row->adres; ?></td>
 
 <td>
-<a href="edit-medewerker.php?id=<?php echo $row->medewerkerID; ?>" title="Edit">Edit</a>&nbsp;&nbsp;
-<a href="delete-medewerker.php?id=<?php echo $row->medewerkerID; ?>" title="Delete">Delete</a>&nbsp;&nbsp;
+<a href="edit-klant.php?id=<?php echo $row->klantID; ?>" title="Edit">Edit</a>&nbsp;&nbsp;
+<a href="delete-klant.php?id=<?php echo $row->klantID; ?>" title="Delete">Delete</a>&nbsp;&nbsp;
 </td>
 										</tr>
 										<?php }
