@@ -5,22 +5,23 @@ include "includes/checklogin.php";
 check_admin_login();
 //code for add courses
 if (isset($_POST["submit"])) {
-    $naam = $_POST["naam"];
-    $email = $_POST["email"];
-    $telefoon = $_POST["telefoon"];
-    $adres = $_POST["adres"];
+	$naam = $_POST["naam"];
+	$email = $_POST["email"];
+	$telefoon = $_POST["telefoon"];
+	$adres = $_POST["adres"];
 
-    $query =
-        "INSERT INTO `klant`(`naam`, `email`, `tel`, `adres`) VALUES (?,?,?,?)";
-    $stmt = $conn->prepare($query);
-    $rc = $stmt->bind_param("ssss", $naam, $email, $telefoon, $adres);
-    $stmt->execute();
-    echo "<script>alert('medewerker has been created');</script>";
-    header("location:klanten.php");
+	$query =
+		"INSERT INTO `klant`(`naam`, `email`, `tel`, `adres`) VALUES (?,?,?,?)";
+	$stmt = $conn->prepare($query);
+	$rc = $stmt->bind_param("ssss", $naam, $email, $telefoon, $adres);
+	$stmt->execute();
+	echo "<script>alert('medewerker has been created');</script>";
+	header("location:klanten.php");
 }
 ?>
 <!doctype html>
 <html lang="en" class="no-js">
+
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -37,9 +38,10 @@ if (isset($_POST["submit"])) {
 	<link rel="stylesheet" href="css/fileinput.min.css">
 	<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css">
 	<link rel="stylesheet" href="css/style.css">
-<script type="text/javascript" src="js/jquery-1.11.3-jquery.min.js"></script>
-<script type="text/javascript" src="js/validation.min.js"></script>
+	<script type="text/javascript" src="js/jquery-1.11.3-jquery.min.js"></script>
+	<script type="text/javascript" src="js/validation.min.js"></script>
 </head>
+
 <body>
 	<?php include "includes/header.php"; ?>
 	<div class="ts-main-content">
@@ -56,65 +58,65 @@ if (isset($_POST["submit"])) {
 							<div class="col-md-12">
 								<div class="panel panel-default">
 									<div class="panel-heading">
-								Register Klant</div>
+										Register Klant</div>
 									<div class="panel-body">
 										<form method="post" class="form-horizontal">
 
-						<div class="hr-dashed"></div>
+											<div class="hr-dashed"></div>
 
-				 <div class="form-group">
-				<label class="col-sm-2 control-label">Naam</label>
-		<div class="col-sm-8">
-	<input type="text" class="form-control" name="naam" id="naam"  required="required">
-						 </div>
-						</div>
-<div class="form-group">
-									<label class="col-sm-2 control-label">Email</label>
-									<div class="col-sm-8">
-									<input type="text" class="form-control" name="email"  >
+											<div class="form-group">
+												<label class="col-sm-2 control-label">Naam</label>
+												<div class="col-sm-8">
+													<input type="text" class="form-control" name="naam" id="naam" required="required">
 												</div>
 											</div>
 											<div class="form-group">
-																				<label class="col-sm-2 control-label">Telefoon</label>
-																				<div class="col-sm-8">
-																				<input type="text" class="form-control" name="telefoon"  >
-																							</div>
-																						</div>
-
-																						<div class="form-group">
-																															<label class="col-sm-2 control-label">Adres</label>
-																															<div class="col-sm-8">
-																															<input type="text" class="form-control" name="adres"  >
-																																		</div>
-																																	</div>
-
-
-												<div class="col-sm-8 col-sm-offset-2">
-
-													<input class="btn btn-primary" type="submit" name="submit" value="Register">
+												<label class="col-sm-2 control-label">Email</label>
+												<div class="col-sm-8">
+													<input type="text" class="form-control" name="email">
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-2 control-label">Telefoon</label>
+												<div class="col-sm-8">
+													<input type="text" class="form-control" name="telefoon">
 												</div>
 											</div>
 
-										</form>
+											<div class="form-group">
+												<label class="col-sm-2 control-label">Adres</label>
+												<div class="col-sm-8">
+													<input type="text" class="form-control" name="adres">
+												</div>
+											</div>
 
+
+											<div class="col-sm-8 col-sm-offset-2">
+
+												<input class="btn btn-primary" type="submit" name="submit" value="Register">
+											</div>
 									</div>
+
+									</form>
+
 								</div>
-
-
 							</div>
 
 
-
-
-							</div>
 						</div>
+
+
+
 
 					</div>
 				</div>
 
-
 			</div>
 		</div>
+
+
+	</div>
+	</div>
 	</div>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap-select.min.js"></script>
@@ -126,7 +128,7 @@ if (isset($_POST["submit"])) {
 	<script src="js/chartData.js"></script>
 	<script src="js/main.js"></script>
 
-</script>
+	</script>
 </body>
 
 </html>

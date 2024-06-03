@@ -27,8 +27,6 @@ check_login();
 </head>
 
 <body>
-	<?php include "includes/header.php"; ?>
-
 	<div class="ts-main-content">
 		<?php include "includes/sidebar.php"; ?>
 		<div class="content-wrapper">
@@ -114,6 +112,8 @@ check_login();
 	<script src="js/fileinput.js"></script>
 	<script src="js/chartData.js"></script>
 	<script src="js/main.js"></script>
+	<script src="js/sidebar.js"></script>
+	<script src="js/bootstrap.bundle.min.js"></script>
 
 </body>
 

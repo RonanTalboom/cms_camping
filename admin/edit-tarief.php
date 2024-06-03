@@ -79,13 +79,14 @@ if (isset($_POST["submit"])) {
 													</div>
 												</div>
 												<div class="form-group">
-                                                <label class="col-sm-2 control-label">Kosten in E</label>
-                                                <div class="col-sm-8">
-                                                    <div class="input-group mb-3">
-                                                        <span class="input-group-text">€</span>
-                                                        <input type="number" step="0.01" class="form-control" name="kosten" value="<?php echo $row->kosten; ?>">
-                                                    </div>
-                                                </div>
+													<label class="col-sm-2 control-label">Kosten in E</label>
+													<div class="col-sm-8">
+														<div class="input-group mb-3">
+															<span class="input-group-text">€</span>
+															<input type="number" step="0.01" class="form-control" name="kosten" value="<?php echo $row->kosten; ?>">
+														</div>
+													</div>
+												</div>
 
 
 											<?php }

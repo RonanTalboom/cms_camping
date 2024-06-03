@@ -2,38 +2,39 @@
 session_start();
 include('includes/config.php');
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Include database connection
-    // Get email and password from the form
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    // Prepare SQL statement to prevent SQL injection
-    $stmt = $conn->prepare("SELECT medewerkerID FROM medewerkers WHERE email = ? AND wachtwoord = ?");
-    $stmt->bind_param("ss", $email, $password);
-    
-    $stmt->execute(); // Execute the query
-        $stmt->store_result(); // Store the result
-    // Check if the user exists
-    if ($stmt->num_rows == 1) {
-        
-        $stmt->bind_result($id); // Bind the result to variables
-        $stmt->fetch(); // Fetch the result
-        //  authentication successful, store user details in session
-        $_SESSION['id'] = $id;
-        $_SESSION['email'] = $email;
+	// Include database connection
+	// Get email and password from the form
+	$email = $_POST['email'];
+	$password = $_POST['password'];
+	// Prepare SQL statement to prevent SQL injection
+	$stmt = $conn->prepare("SELECT medewerkerID FROM medewerkers WHERE email = ? AND wachtwoord = ?");
+	$stmt->bind_param("ss", $email, $password);
 
-        header("location: dashboard.php"); // Redirect to a secure page
-        exit(); // Always exit after a header redirect
-    } else {
-        // Authentication failed, display an error message
-        $error = "Invalid email or password";
-    }
-    // Close statement
-    $stmt->close();
+	$stmt->execute(); // Execute the query
+	$stmt->store_result(); // Store the result
+	// Check if the user exists
+	if ($stmt->num_rows == 1) {
+
+		$stmt->bind_result($id); // Bind the result to variables
+		$stmt->fetch(); // Fetch the result
+		//  authentication successful, store user details in session
+		$_SESSION['id'] = $id;
+		$_SESSION['email'] = $email;
+
+		header("location: dashboard.php"); // Redirect to a secure page
+		exit(); // Always exit after a header redirect
+	} else {
+		// Authentication failed, display an error message
+		$error = "Invalid email or password";
+	}
+	// Close statement
+	$stmt->close();
 }
-				?>
+?>
 
 <!doctype html>
 <html lang="en" class="no-js">
+
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -50,63 +51,57 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	<link rel="stylesheet" href="css/fileinput.min.css">
 	<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css">
 	<link rel="stylesheet" href="css/style.css">
-<script type="text/javascript" src="js/jquery-1.11.3-jquery.min.js"></script>
-<script type="text/javascript" src="js/validation.min.js"></script>
-<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
-<script type="text/javascript">
-function valid()
-{
-if(document.registration.password.value!= document.registration.cpassword.value)
-{
-alert("Password and Re-Type Password Field do not match  !!");
-document.registration.cpassword.focus();
-return false;
-}
-return true;
-}
-</script>
+	<link rel="stylesheet" href="css/signin.css">
+	<script type="text/javascript" src="js/jquery-1.11.3-jquery.min.js"></script>
+	<script type="text/javascript" src="js/validation.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+	<script type="text/javascript">
+		function valid() {
+			if (document.registration.password.value != document.registration.cpassword.value) {
+				alert("Password and Re-Type Password Field do not match  !!");
+				document.registration.cpassword.focus();
+				return false;
+			}
+			return true;
+		}
+	</script>
 </head>
+
 <body>
-	<?php include('includes/header.php');?>
-	<div class="ts-main-content">
-		<?php include('includes/sidebar.php');?>
-		<div class="content-wrapper">
-			<div class="container-fluid">
-    
-				<div class="row">
-					<div class="col-md-12">
-        
-						<h2 class="page-title">User Login </h2>
+	<div class="container-fluid">
+		<div class="row">
 
-						<div class="row">
-					<div class="col-md-6 col-md-offset-3">
-						<div class="well row pt-2x pb-3x bk-light">
-							<div class="col-md-8 col-md-offset-2">
-							 <?php if (isset($error)) echo "<div class='error'>$error</div>"; ?>
-								<form action="" class="mt" method="post">
-									<label for="" class="text-uppercase text-sm">Email</label>
-									<input type="text" placeholder="Email" name="email" class="form-control mb">
-									<label for="" class="text-uppercase text-sm">Password</label>
-									<input type="password" placeholder="Password" name="password" class="form-control mb">
-									
+			<?php include('includes/sidebar.php'); ?>
 
-									<input type="submit" name="login" class="btn btn-primary btn-block" value="login" >
-								</form>
-							</div>
-						</div>
-						<div class="text-center text-light">
-							<a href="forgot-password.php" class="text-light">Forgot password?</a>
-						</div>
+			<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 text-center sign-in">
+
+				<div class="form-signin">
+					<h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+					<div>
+						<?php if (isset($error)) {
+							echo "<div class='error'>$error</div>";
+						} ?>
 					</div>
+					<form action="" class="mt" method="post">
+						<div class="form-floating">
+							<label for="" class="text-uppercase text-sm">Email</label>
+							<input type="text" placeholder="Email" name="email" class="form-control mb">
+						</div>
+						<div class="form-floating">
+							<label for="" class="text-uppercase text-sm">Password</label>
+							<input type="password" placeholder="Password" name="password" class="form-control mb">
+						</div>
+
+
+						<button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+					</form>
 				</div>
-						</div>
-							</div>
-						</div>
-					</div>
-				</div> 	
-			</div>
+
+			</main>
+
 		</div>
 	</div>
+
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap-select.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
