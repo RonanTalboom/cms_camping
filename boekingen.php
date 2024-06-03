@@ -27,87 +27,100 @@ check_login();
 </head>
 
 <body>
-	<?php include "includes/header.php"; ?>
-
-	<div class="ts-main-content">
+	<div class="container-fluid">
+		<div class="row">
 			<?php include "includes/sidebar.php"; ?>
-		<div class="content-wrapper">
-			<div class="container-fluid">
-			    <div class="row">
-                    <div class="col-md-8">
-                        <h2 class="page-title" style="margin-top:4%">Klanten</h2>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="register-boeking.php" class="btn btn-primary">Nieuwe Boeking</a>
-                    </div>
-			    </div>
-				<div class="row">
-					<div class="col-md-12">
-						<div class="panel panel-default">
-							<div class="panel-heading">Boekingen</div>
-							<div class="panel-body">
-								<table id="zctb" class="display table table-striped table-bordered table-hover" cellspacing="0" width="100%">
-									<thead>
-										<tr>
-											<th>#</th>
-											<th>KlantID</th>
-											<th>Boeking Datum</th>
-											<th>Check in Tijd</th>
-											<th>Check uit Tijd</th>
-											<th>Type</th>
-											<th>status</th>
-											<th>Action</th>
-										</tr>
-									</thead>
-									<tbody>
-<?php
-$ret = "SELECT * FROM boekingen";
-$stmt = $conn->prepare($ret);
-$stmt->execute(); //ok
-$res = $stmt->get_result();
-while ($row = $res->fetch_object()) { ?>
-<td><?php echo $row->boekingID; ?></td>
-<td><?php echo $row->klantID; ?></td>
-<td><?php echo $row->boeking_datum; ?></td>
-<td><?php echo $row->checkin_datum; ?></td>
-<td><?php echo $row->checkuit_datum; ?></td>
-<td><?php echo $row->type; ?></td>
-<td><?php echo $row->status; ?></td>
-
-<td>
-<a href="edit-boeking.php?id=<?php echo $row->klantID; ?>" title="Edit">Edit</a>&nbsp;&nbsp;
-<a href="delete-boeking.php?id=<?php echo $row->klantID; ?>" title="Delete">Delete</a>&nbsp;&nbsp;
-</td>
-										</tr>
-										<?php }
-?>
-									</tbody>
-								</table>
-
-
-							</div>
+			<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-8 text-start">
+							<h2 class="page-title" >Boekingen</h2>
 						</div>
-
-
+						<div class="col-md-4 text-end">
+							<a href="register-boeking.php" class="btn btn-primary">Nieuwe Boeking</a>
+						</div>
 					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="panel panel-default">
+								<div class="panel-body">
+									<table id="zctb" class="display table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+										<thead>
+											<tr>
+												<th>#</th>
+												<th>Klant Naam</th>
+												<th>Boeking Datum</th>
+												<th>Check in Tijd</th>
+												<th>Check uit Tijd</th>
+												<th>status</th>
+												<th>Open</th>
+												<th>Action</th>
+											</tr>
+										</thead>
+										<tbody>
+											<?php
+											$ret = "SELECT * FROM boekingen INNER JOIN klant ON boekingen.klantID = klant.klantID";
+											$stmt = $conn->prepare($ret);
+											$stmt->execute(); //ok
+											$res = $stmt->get_result();
+											while ($row = $res->fetch_object()) { ?>
+												<td><?php echo $row->boekingID; ?></td>
+												<td><?php echo $row->naam; ?></td>
+												<td><?php echo $row->boeking_datum; ?></td>
+												<td><?php echo $row->checkin_datum; ?></td>
+												<td><?php echo $row->checkuit_datum; ?></td>
+												<td><?php echo $row->status; ?></td>
+												<td>
+													<?php $checkuit_datum = new DateTime($row->checkuit_datum); // assuming $row->checkuit_datum is the check-out date from your database
+													$now = new DateTime();
+
+													if ($checkuit_datum > $now) {
+														echo "Open";
+													} else {
+														echo "Closed";
+													}
+
+													?>
+
+												</td>
+
+												<td>
+													<a href="view-boeking.php?id=<?php echo $row->boekingID; ?>" title="View">View</a>&nbsp;&nbsp;
+													<a href="edit-boeking.php?id=<?php echo $row->boekingID; ?>" title="Edit">Edit</a>&nbsp;&nbsp;
+													<a href="delete-boeking.php?id=<?php echo $row->boekingID; ?>" title="Delete">Delete</a>&nbsp;&nbsp;
+												</td>
+												</tr>
+											<?php }
+											?>
+										</tbody>
+									</table>
+
+
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+
+
+
 				</div>
-
-
-
-			</div>
+			</main>
 		</div>
 	</div>
-
-	<!-- Loading Scripts -->
-	<script src="js/jquery.min.js"></script>
-	<script src="js/bootstrap-select.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery.dataTables.min.js"></script>
-	<script src="js/dataTables.bootstrap.min.js"></script>
-	<script src="js/Chart.min.js"></script>
-	<script src="js/fileinput.js"></script>
-	<script src="js/chartData.js"></script>
-	<script src="js/main.js"></script>
+		<!-- Loading Scripts -->
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap-select.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/jquery.dataTables.min.js"></script>
+		<script src="js/dataTables.bootstrap.min.js"></script>
+		<script src="js/Chart.min.js"></script>
+		<script src="js/fileinput.js"></script>
+		<script src="js/chartData.js"></script>
+		<script src="js/main.js"></script>
+		<script src="js/sidebar.js"></script>
+		<script src="js/bootstrap.bundle.min.js"></script>
 
 </body>
 

@@ -5,34 +5,35 @@ include "../includes/checklogin.php";
 check_admin_login();
 //code for add courses
 if (isset($_POST["submit"])) {
-    $naam = $_POST["naam"];
-    $email = $_POST["email"];
-    $telefoon = $_POST["telefoon"];
-    $manager = $_POST["manager"];
-    $wachtwoord = $_POST["wachtwoord"];
-    $manageri = 0;
-    if ($manager) {
-        $manageri = 1;
-    }
+	$naam = $_POST["naam"];
+	$email = $_POST["email"];
+	$telefoon = $_POST["telefoon"];
+	$manager = $_POST["manager"];
+	$wachtwoord = $_POST["wachtwoord"];
+	$manageri = 0;
+	if ($manager) {
+		$manageri = 1;
+	}
 
-    $query =
-        "INSERT INTO `medewerkers`(`naam`, `email`, `telefoon`, `manager`, `wachtwoord`) VALUES (?,?,?,?,?)";
-    $stmt = $conn->prepare($query);
-    $rc = $stmt->bind_param(
-        "sssis",
-        $naam,
-        $email,
-        $telefoon,
-        $manageri,
-        $wachtwoord
-    );
-    $stmt->execute();
-    echo "<script>alert('medewerker has been created');</script>";
-    header("location:medewerkers.php");
+	$query =
+		"INSERT INTO `medewerkers`(`naam`, `email`, `telefoon`, `manager`, `wachtwoord`) VALUES (?,?,?,?,?)";
+	$stmt = $conn->prepare($query);
+	$rc = $stmt->bind_param(
+		"sssis",
+		$naam,
+		$email,
+		$telefoon,
+		$manageri,
+		$wachtwoord
+	);
+	$stmt->execute();
+	echo "<script>alert('medewerker has been created');</script>";
+	header("location:medewerkers.php");
 }
 ?>
 <!doctype html>
 <html lang="en" class="no-js">
+
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -49,9 +50,10 @@ if (isset($_POST["submit"])) {
 	<link rel="stylesheet" href="../css/fileinput.min.css">
 	<link rel="stylesheet" href="../css/awesome-bootstrap-checkbox.css">
 	<link rel="stylesheet" href="../css/style.css">
-<script type="text/javascript" src="js/jquery-1.11.3-jquery.min.js"></script>
-<script type="text/javascript" src="js/validation.min.js"></script>
+	<script type="text/javascript" src="js/jquery-1.11.3-jquery.min.js"></script>
+	<script type="text/javascript" src="js/validation.min.js"></script>
 </head>
+
 <body>
 	<?php include "../includes/header.php"; ?>
 	<div class="ts-main-content">
@@ -68,73 +70,73 @@ if (isset($_POST["submit"])) {
 							<div class="col-md-12">
 								<div class="panel panel-default">
 									<div class="panel-heading">
-								Register Medewerker</div>
+										Register Medewerker</div>
 									<div class="panel-body">
 										<form method="post" class="form-horizontal">
 
-						<div class="hr-dashed"></div>
+											<div class="hr-dashed"></div>
 
-				 <div class="form-group">
-				<label class="col-sm-2 control-label">Naam</label>
-		<div class="col-sm-8">
-	<input type="text" class="form-control" name="naam" id="naam"  required="required">
-						 </div>
-						</div>
-<div class="form-group">
-									<label class="col-sm-2 control-label">Email</label>
-									<div class="col-sm-8">
-									<input type="text" class="form-control" name="email"  >
+											<div class="form-group">
+												<label class="col-sm-2 control-label">Naam</label>
+												<div class="col-sm-8">
+													<input type="text" class="form-control" name="naam" id="naam" required="required">
 												</div>
 											</div>
 											<div class="form-group">
-																				<label class="col-sm-2 control-label">Telefoon</label>
-																				<div class="col-sm-8">
-																				<input type="text" class="form-control" name="telefoon"  >
-																							</div>
-																						</div>
-																						<div class="form-group">
-																															<label class="col-sm-2 control-label">Manager</label>
-																															<div class="form-check">
-  <input class="form-check-input" type="checkbox" name="manager" id="manager">
-  <label class="form-check-label" for="manager">
-    Leidinggevende
-  </label>
-</div>
-																																	</div>
-																						<div class="form-group">
-																															<label class="col-sm-2 control-label">Wachtwoord</label>
-																															<div class="col-sm-8">
-																															<input type="text" class="form-control" name="wachtwoord"  >
-																																		</div>
-																																	</div>
-
-
-												<div class="col-sm-8 col-sm-offset-2">
-
-													<input class="btn btn-primary" type="submit" name="submit" value="Register">
+												<label class="col-sm-2 control-label">Email</label>
+												<div class="col-sm-8">
+													<input type="text" class="form-control" name="email">
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-2 control-label">Telefoon</label>
+												<div class="col-sm-8">
+													<input type="text" class="form-control" name="telefoon">
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-2 control-label">Manager</label>
+												<div class="form-check">
+													<input class="form-check-input" type="checkbox" name="manager" id="manager">
+													<label class="form-check-label" for="manager">
+														Leidinggevende
+													</label>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-2 control-label">Wachtwoord</label>
+												<div class="col-sm-8">
+													<input type="text" class="form-control" name="wachtwoord">
 												</div>
 											</div>
 
-										</form>
 
+											<div class="col-sm-8 col-sm-offset-2">
+
+												<input class="btn btn-primary" type="submit" name="submit" value="Register">
+											</div>
 									</div>
+
+									</form>
+
 								</div>
-
-
 							</div>
 
 
-
-
-							</div>
 						</div>
+
+
+
 
 					</div>
 				</div>
 
-
 			</div>
 		</div>
+
+
+	</div>
+	</div>
 	</div>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap-select.min.js"></script>
@@ -146,7 +148,7 @@ if (isset($_POST["submit"])) {
 	<script src="js/chartData.js"></script>
 	<script src="js/main.js"></script>
 
-</script>
+	</script>
 </body>
 
 </html>
