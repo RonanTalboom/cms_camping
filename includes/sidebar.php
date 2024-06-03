@@ -6,9 +6,9 @@
 	<ul class="nav nav-pills flex-column mb-auto">
 
 		<?php if (isset($_SESSION["admin_id"])) { ?>
-			<li class="nav-item"><a class="nav-link link-dark" href="admin/dashboard.php"><i class="fa fa-desktop"></i>Dashboard</a></li>
-			<li class="nav-item"><a class="nav-link link-dark" href="admin/medewerkers.php"><i class="fa fa-desktop"></i>medewerkers</a></li>
-			<li class="nav-item"><a class="nav-link link-dark" href="admin/tarieven.php"><i class="fa fa-desktop"></i>Tarieven</a></li>
+			<li class="nav-item"><a class="nav-link link-dark" href="dashboard.php"><i class="fa fa-desktop"></i>Dashboard</a></li>
+			<li class="nav-item"><a class="nav-link link-dark" href="medewerkers.php"><i class="fa fa-desktop"></i>medewerkers</a></li>
+			<li class="nav-item"><a class="nav-link link-dark" href="tarieven.php"><i class="fa fa-desktop"></i>Tarieven</a></li>
 			<li class="nav-item"><a class="nav-link link-dark" href="klanten.php"><i class="fa fa-desktop"></i>klanten</a></li>
 			<li class="nav-item"><a class="nav-link link-dark" href="boekingen.php"><i class="fa fa-desktop"></i>Boekingen</a></li>
 

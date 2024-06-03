@@ -28,75 +28,75 @@ check_login();
 
 <body>
 
-	<div class="ts-main-content">
-		<?php include "includes/sidebar.php"; ?>
-		<div class="content-wrapper">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-md-8">
-						<h2 class="page-title" style="margin-top:4%">Plaatsen Camping le qrukoe</h2>
-					</div>
-					<div class="col-md-4">
-					<?php if (!strlen($_SESSION["admin_id"]) == 0) { ?>
-						<a href="admin/register-plaats.php" class="btn btn-primary">Voeg Plaats Toe</a>
-					</div>
-					<?php } ?>
-				</div>
-				<div class="row">
-					<div class="col-md-12">
-						<div class="panel panel-default">
-							<div class="panel-heading">Plaats</div>
-							<div class="panel-body">
-								<table id="zctb" class="display table table-striped table-bordered table-hover" cellspacing="0" width="100%">
-									<thead>
-										<tr>
-											<th>#</th>
-											<th>Naam</th>
-											<th>Beschrijving</th>
-											<th>Groot</th>
-											<th>Action</th>
-										</tr>
-									</thead>
-									<tbody>
-										<?php
-										$ret = "SELECT * FROM plaatsen";
-										$stmt = $conn->prepare($ret);
-										$stmt->execute(); //ok
-										$res = $stmt->get_result();
-										while ($row = $res->fetch_object()) { ?>
-											<td><?php echo $row->ID; ?></td>
-											<td><?php echo $row->naam; ?></td>
-											<td><?php echo $row->beschrijving; ?></td>
-											<td><?php if ($row->groot === 1) {
-													echo "Yes";
-												} else {
-													echo "No";
-												} ?></td>
-
-											<td>
-												<?php if (!strlen($_SESSION["admin_id"]) == 0) { ?>
-												<a href="admin/edit-plaats.php?id=<?php echo $row->ID; ?>" title="Edit">Edit</a>&nbsp;&nbsp;
-												<a href="admin/delete-plaats.php?id=<?php echo $row->ID; ?>" title="Delete">Delete</a>&nbsp;&nbsp;
-											<?php } ?>
-											
-											</td>
-											</tr>
-										<?php }
-										?>
-									</tbody>
-								</table>
-
-
-							</div>
+	<div class="container-fluid">
+		<div class="row">
+			<?php include "includes/sidebar.php"; ?>
+			<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-8">
+							<h2 class="page-title text-start">Plaatsen Camping le qrukoe</h2>
 						</div>
-
-
+						<div class="col-md-4 text-end">
+							<?php if (!strlen($_SESSION["admin_id"]) == 0) { ?>
+								<a href="admin/register-plaats.php" class="btn btn-primary">Voeg Plaats Toe</a>
+						</div>
+					<?php } ?>
 					</div>
-				</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="panel panel-default">
+								<div class="panel-body">
+									<table id="zctb" class="display table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+										<thead>
+											<tr>
+												<th>#</th>
+												<th>Naam</th>
+												<th>Beschrijving</th>
+												<th>Groot</th>
+												<th>Action</th>
+											</tr>
+										</thead>
+										<tbody>
+											<?php
+											$ret = "SELECT * FROM plaatsen";
+											$stmt = $conn->prepare($ret);
+											$stmt->execute(); //ok
+											$res = $stmt->get_result();
+											while ($row = $res->fetch_object()) { ?>
+												<td><?php echo $row->ID; ?></td>
+												<td><?php echo $row->naam; ?></td>
+												<td><?php echo $row->beschrijving; ?></td>
+												<td><?php if ($row->groot === 1) {
+														echo "Yes";
+													} else {
+														echo "No";
+													} ?></td>
+
+												<td>
+													<?php if (!strlen($_SESSION["admin_id"]) == 0) { ?>
+														<a href="admin/edit-plaats.php?id=<?php echo $row->ID; ?>" title="Edit">Edit</a>&nbsp;&nbsp;
+														<a href="admin/delete-plaats.php?id=<?php echo $row->ID; ?>" title="Delete">Delete</a>&nbsp;&nbsp;
+													<?php } ?>
+
+												</td>
+												</tr>
+											<?php }
+											?>
+										</tbody>
+									</table>
+
+
+								</div>
+							</div>
+
+
+						</div>
+					</div>
 
 
 
-			</div>
+			</main>
 		</div>
 	</div>
 
@@ -110,6 +110,8 @@ check_login();
 	<script src="js/fileinput.js"></script>
 	<script src="js/chartData.js"></script>
 	<script src="js/main.js"></script>
+	<script src="js/sidebar.js"></script>
+	<script src="js/bootstrap.bundle.min.js"></script>
 
 </body>
 
