@@ -1,50 +1,42 @@
-<nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse" style="width: 280px;">
-	<a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-black text-decoration-none">
-		<span class="fs-4">LE  CRACK</span>
-	</a>
-	<hr>
-	<ul class="nav nav-pills flex-column mb-auto">
+<nav class="w-64 bg-base-200 p-4 flex flex-col">
+	<h2 class="text-xl font-bold mb-4">Dashboard</h2>
+	<ul class="menu flex-grow">
+		<li class="menu-title">
+			<span>Menu</span>
+		</li>
 
 		<?php if (isset($_SESSION["admin_id"])) { ?>
-			<li class="nav-item"><a class="nav-link link-dark" href="dashboard.php"><i class="fa fa-desktop"></i>Dashboard</a></li>
-			<li class="nav-item"><a class="nav-link link-dark" href="medewerkers.php"><i class="fa fa-desktop"></i>medewerkers</a></li>
-			<li class="nav-item"><a class="nav-link link-dark" href="tarieven.php"><i class="fa fa-desktop"></i>Tarieven</a></li>
-			<li class="nav-item"><a class="nav-link link-dark" href="klanten.php"><i class="fa fa-desktop"></i>klanten</a></li>
-			<li class="nav-item"><a class="nav-link link-dark" href="boekingen.php"><i class="fa fa-desktop"></i>Boekingen</a></li>
-			<li class="nav-item"><a class="nav-link link-dark" href="plaatsen.php"><i class="fa fa-desktop"></i>Plaatsen</a></li>
+			<li><a href="dashboard.php">Dashboard</a></li>
+			<li><a href="medewerkers.php">medewerkers</a></li>
+			<li><a href="tarieven.php">Tarieven</a></li>
+			<li><a href="klanten.php">klanten</a></li>
+			<li><a href="boekingen.php">Boekingen</a></li>
+			<li><a href="plaatsen.php">Plaatsen</a></li>
 
 		<?php } elseif (isset($_SESSION["id"])) { ?>
-			<li><a class="nav-link link-dark" href="dashboard.php"><i class="fa fa-desktop"></i>Dashboard</a></li>
-			<li><a class="nav-link link-dark" href="klanten.php"><i class="fa fa-desktop"></i>klanten</a></li>
-			<li><a class="nav-link link-dark" href="boekingen.php"><i class="fa fa-desktop"></i>Boekingen</a></li>
-			<li><a class="nav-link link-dark" href="plaatsen.php"><i class="fa fa-desktop"></i>Plaatsen</a></li>
+			<li><a href="klanten.php">klanten</a></li>
+			<li><a href="boekingen.php">Boekingen</a></li>
+			<li><a href="plaatsen.php">Plaatsen</a></li>
 
-
-		<?php } else { ?>
-
-			<li><a class="nav-link link-dark" href="login.php"><i class="fa fa-users"></i>Login</a></li>
-			
-		<?php } ?>
+		<?php }  ?>
 	</ul>
 	<?php if (
 		$_SESSION["id"] ||
 		$_SESSION["admin_id"]
 	) { ?>
+		<a href="#" class="flex items-center">
+			<img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-full me-2">
+			<div class="flex flex-col">
+				<strong class="text-black no-underline"><?php echo $_SESSION["email"] ?></strong>
+				<?php if (isset($_SESSION["admin_id"])) { ?>
+					Admin
+				<?php } ?>
+			</div>
+		</a>
 		<hr>
-		<div class="dropdown">
-			<a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-				<img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-				<strong><?php echo $_SESSION["email"] ?></strong>
-			</a>
-			<ul class="dropdown-menu text-small shadow">
-				<li><a class="dropdown-item" href="#">Settings</a></li>
-				<li><a class="dropdown-item" href="#">Profile</a></li>
-				<li>
-					<hr class="dropdown-divider">
-				</li>
-				<li><a class="dropdown-item" href="logout.php">Logout</a></li>
-			</ul>
-		</div>
+		<ul class="menu mt-auto">
+			<li><a href="logout.php">Logout</a></li>
+		</ul>
 	<?php } ?>
 
 </nav>

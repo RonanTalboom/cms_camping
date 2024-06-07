@@ -11,102 +11,64 @@ check_login();
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-	<meta name="description" content="">
-	<meta name="author" content="">
-	<meta name="theme-color" content="#3e454c">
-	<title>My Complaints</title>
-	<link rel="stylesheet" href="css/font-awesome.min.css">
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
-	<link rel="stylesheet" href="css/bootstrap-social.css">
-	<link rel="stylesheet" href="css/bootstrap-select.css">
-	<link rel="stylesheet" href="css/fileinput.min.css">
-	<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css">
+	<title>CAMPING</title>
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/signin.css">
+	<link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+</head>
+
 
 </head>
 
 <body>
-	<div class="container-fluid">
-		<div class="row">
-			<?php include "includes/sidebar.php"; ?>
-			<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-md-8 text-start">
-							<h2 class="page-title">Klanten</h2>
-						</div>
-						<div class="col-md-4 text-end">
-							<a href="register-klant.php" class="btn btn-primary">Voeg Klant Toe</a>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="panel panel-default">
-								<div class="panel-body">
-									<table class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
-										<thead>
-											<tr>
-												<th>id</th>
-												<th>Naam</th>
-												<th>Email</th>
-												<th>Telefoon</th>
-												<th>Adres</th>
-												<th>Action</th>
-											</tr>
-										</thead>
-										<tbody>
-											<?php
-											$ret = "SELECT * FROM klant";
-											$stmt = $conn->prepare($ret);
-											$stmt->execute(); //ok
-											$res = $stmt->get_result();
-											while ($row = $res->fetch_object()) { ?>
-												<td><?php echo $row->klantID; ?></td>
-												<td><?php echo $row->naam; ?></td>
-												<td><?php echo $row->email; ?></td>
-												<td><?php echo $row->tel; ?></td>
-												<td><?php echo $row->adres; ?></td>
-
-												<td>
-													<a href="edit-klant.php?id=<?php echo $row->klantID; ?>" title="Edit">Edit</a>&nbsp;&nbsp;
-													<a href="delete-klant.php?id=<?php echo $row->klantID; ?>" title="Delete">Delete</a>&nbsp;&nbsp;
-												</td>
-												</tr>
-											<?php }
-											?>
-										</tbody>
-									</table>
-
-
-								</div>
-							</div>
-
-
-						</div>
-					</div>
-
-
-
+	<div class="flex min-h-screen">
+		<?php include "includes/sidebar.php"; ?>
+		<main class="flex-1 p-6">
+			<div class="container mx-auto">
+				<div class="flex justify-between items-center">
+				<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="search" type="text" placeholder="Search">
+					<a href="register-klant.php" class="btn btn-primary">Voeg Klant Toe</a>
 				</div>
-			</main>
-		</div>
+				<h2 class="text-2xl font-bold">Klanten</h2>
+
+				<table class="table w-full mt-4">
+					<thead>
+						<tr>
+							<th>id</th>
+							<th>Naam</th>
+							<th>Email</th>
+							<th>Telefoon</th>
+							<th>Adres</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php
+						$ret = "SELECT * FROM klant";
+						$stmt = $conn->prepare($ret);
+						$stmt->execute(); //ok
+						$res = $stmt->get_result();
+						while ($row = $res->fetch_object()) { ?>
+							<td><?php echo $row->klantID; ?></td>
+							<td><?php echo $row->naam; ?></td>
+							<td><?php echo $row->email; ?></td>
+							<td><?php echo $row->tel; ?></td>
+							<td><?php echo $row->adres; ?></td>
+
+							<td>
+								<a href="edit-klant.php?id=<?php echo $row->klantID; ?>" title="Edit">Edit</a>&nbsp;&nbsp;
+								<a href="delete-klant.php?id=<?php echo $row->klantID; ?>" title="Delete">Delete</a>&nbsp;&nbsp;
+							</td>
+							</tr>
+						<?php }
+						?>
+					</tbody>
+				</table>
+			</div>
+		</main>
 	</div>
-
-	<!-- Loading Scripts -->
-	<script src="js/jquery.min.js"></script>
-	<script src="js/bootstrap-select.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery.dataTables.min.js"></script>
-	<script src="js/dataTables.bootstrap.min.js"></script>
-	<script src="js/Chart.min.js"></script>
-	<script src="js/fileinput.js"></script>
-	<script src="js/chartData.js"></script>
-	<script src="js/main.js"></script>
-	<script src="js/sidebar.js"></script>
-	<script src="js/bootstrap.bundle.min.js"></script>
-
-
 </body>
 
 </html>
