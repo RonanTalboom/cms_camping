@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		//  authentication successful, store user details in session
 		$_SESSION['id'] = $id;
 		$_SESSION['email'] = $email;
-		if ($manager == 1){
+		if ($manager == 1) {
 			$_SESSION['admin_id'] = $id;
 		}
 
@@ -37,28 +37,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 <!doctype html>
-<html lang="en" class="no-js">
+<html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-	<meta name="description" content="">
-	<meta name="author" content="">
-	<meta name="theme-color" content="#3e454c">
 	<title>CAMPING</title>
-	<link rel="stylesheet" href="css/font-awesome.min.css">
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
-	<link rel="stylesheet" href="css/bootstrap-social.css">
-	<link rel="stylesheet" href="css/bootstrap-select.css">
-	<link rel="stylesheet" href="css/fileinput.min.css">
-	<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css">
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/signin.css">
-	<script type="text/javascript" src="js/jquery-1.11.3-jquery.min.js"></script>
-	<script type="text/javascript" src="js/validation.min.js"></script>
-	<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+	<script src="https://cdn.tailwindcss.com"></script>
 	<script type="text/javascript">
 		function valid() {
 			if (document.registration.password.value != document.registration.cpassword.value) {
@@ -72,49 +58,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
-	<div class="container-fluid">
-		<div class="row">
+	<main class="bg-gray-100 flex items-center justify-center min-h-screen">
 
-			<?php include('includes/sidebar.php'); ?>
-
-			<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 text-center sign-in">
-
-				<div class="form-signin">
-					<h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-					<div>
-						<?php if (isset($error)) {
-							echo "<div class='error'>$error</div>";
-						} ?>
-					</div>
-					<form action="" class="mt" method="post">
-						<div class="form-floating">
-							<label for="" class="text-uppercase text-sm">Email</label>
-							<input type="email" placeholder="Email" name="email" class="form-control mb">
-						</div>
-						<div class="form-floating">
-							<label for="" class="text-uppercase text-sm">Password</label>
-							<input type="password" placeholder="Password" name="password" class="form-control mb">
-						</div>
-
-
-						<button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-					</form>
+		<div class="card w-full max-w-sm shadow-2xl bg-base-100">
+			<div class="card-body">
+				<h2 class="card-title">Login</h2>
+				<div>
+					<?php if (isset($error)) {
+						echo "<div class='error'>$error</div>";
+					} ?>
 				</div>
+				<form action="" class="mt" method="post">
+					<div class="form-control">
+						<label class="input input-bordered flex items-center gap-2">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4 opacity-70">
+								<path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />
+								<path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
+							</svg>
+							<input type="text" class="grow" placeholder="Email" name="email" />
+						</label>
+					</div>
+					<div class="form-control">
+						<label class="input input-bordered flex items-center gap-2">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4 opacity-70">
+								<path fill-rule="evenodd" d="M14 6a4 4 0 0 1-4.899 3.899l-1.955 1.955a.5.5 0 0 1-.353.146H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2.293a.5.5 0 0 1 .146-.353l3.955-3.955A4 4 0 1 1 14 6Zm-4-2a.75.75 0 0 0 0 1.5.5.5 0 0 1 .5.5.75.75 0 0 0 1.5 0 2 2 0 0 0-2-2Z" clip-rule="evenodd" />
+							</svg>
+							<input type="password" class="grow" placeholder="password" name="password" />
+						</label>
+					</div>
 
-			</main>
-
+					<div class="form-control mt-6">
+						<button class="btn btn-primary" type="submit">Login</button>
+					</div>
+				</form>
+			</div>
 		</div>
-	</div>
-
-	<script src="js/jquery.min.js"></script>
-	<script src="js/bootstrap-select.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery.dataTables.min.js"></script>
-	<script src="js/dataTables.bootstrap.min.js"></script>
-	<script src="js/Chart.min.js"></script>
-	<script src="js/fileinput.js"></script>
-	<script src="js/chartData.js"></script>
-	<script src="js/main.js"></script>
+	</main>
 </body>
 
 </html>
