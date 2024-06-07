@@ -7,14 +7,25 @@ check_admin_login();
 if (isset($_POST["submit"])) {
     $beschrijving = $_POST["beschrijving"];
     $naam = $_POST["naam"];
+    $kosten = $_POST["kosten"];
+    $groot = $_POST["groot"];
+    $grooti = 0;
+    if ($groot) {
+        $grooti = 1;
+    }
+    $electriciteit = $_POST["electriciteit"];
+    $electriciteiti = 0;
+    if ($electriciteit) {
+        $electriciteiti = 1;
+    }
     $id = $_GET["id"];
     $query =
-        "update plaatsen set naam=?, beschrijving=? where ID=?";
+        "update plaatsen set naam=?, beschrijving=?, groot=?, electriciteit=?, kosten=? where ID=?";
     $stmt = $conn->prepare($query);
-    $rc = $stmt->bind_param("ssi", $naam, $beschrijving, $id);
+    $rc = $stmt->bind_param("ssiidi", $naam, $beschrijving, $grooti, $electriciteiti, $kosten,  $id);
     $stmt->execute();
     echo "<script>alert('plaats has been Updated successfully');</script>";
-    header("location: plaatsen.php");
+    header("location:plaatsen.php");
 }
 ?>
 <!doctype html>
@@ -27,7 +38,7 @@ if (isset($_POST["submit"])) {
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="theme-color" content="#3e454c">
-    <title>Edit Tarief</title>
+    <title>Edit Plaats</title>
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
@@ -83,6 +94,28 @@ if (isset($_POST["submit"])) {
                                                         <div class="col-sm-8">
                                                             <textarea type="text" class="form-control" name="beschrijving" id="beschrijving" value="<?php echo $row->beschrijving; ?>" required="required">
                                                         </textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" name="groot" id="groot" <?php echo $row->groot === 1 ? 'checked' : ''; ?>>
+                                                        <label class="form-check-label" for="groot">
+                                                            Kleine / Grote plaats
+                                                        </label>
+                                                    </div>
+
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" name="electriciteit" id="electriciteit" <?php echo $row->electriciteit === 1 ? 'checked' : ''; ?>>
+                                                        <label class="form-check-label" for="electriciteit">
+                                                            Electriciteit
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label">Kosten in E</label>
+                                                        <div class="col-sm-8">
+                                                            <div class="input-group mb-3">
+                                                                <span class="input-group-text">€</span>
+                                                                <input type="number" step="0.01" class="form-control" name="kosten" value="<?php echo $row->kosten; ?>">
+                                                            </div>
                                                         </div>
                                                     </div>
 

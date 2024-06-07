@@ -8,24 +8,32 @@ if (isset($_POST["submit"])) {
     $beschrijving = $_POST["beschrijving"];
     $naam = $_POST["naam"];
     $groot = $_POST["groot"];
+    $kosten = $_POST["kosten"];
     $grooti = 0;
     if ($groot) {
         $grooti = 1;
     }
+    $electriciteit = $_POST["electriciteit"];
+    $electriciteiti = 0;
+    if ( $electriciteit){
+        $electriciteiti = 1;
+    }
 
 
     $query =
-        "INSERT INTO `plaatsen`(`naam`, `beschrijving`,`groot` ) VALUES (?,?, ?)";
+        "INSERT INTO `plaatsen`(`naam`, `beschrijving`,`groot` , `electriciteit`, `kosten` ) VALUES (?,?,?,?)";
     $stmt = $conn->prepare($query);
     $rc = $stmt->bind_param(
-        "ss",
+        "ssiid",
         $naam,
         $beschrijving,
         $grooti,
+        $electriciteiti,
+        $kosten
     );
     $stmt->execute();
     echo "<script>alert('Plaats has been created');</script>";
-    header("location: plaatsen.php");
+    header("location:plaatsen.php");
 }
 ?>
 <!doctype html>
@@ -94,6 +102,23 @@ if (isset($_POST["submit"])) {
                                                     </label>
                                                 </div>
 
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" name="electriciteit" id="electriciteit">
+                                                    <label class="form-check-label" for="electriciteit">
+                                                        Electriciteit
+                                                    </label>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">Kosten in E</label>
+                                                    <div class="col-sm-8">
+                                                        <div class="input-group mb-3">
+                                                            <span class="input-group-text">€</span>
+                                                            <input type="number" step="0.01" class="form-control" name="kosten">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
 
 
                                                 <div class="col-sm-8 col-sm-offset-2">
@@ -119,8 +144,8 @@ if (isset($_POST["submit"])) {
                 </div>
 
 
-        </main>
-    </div>
+            </main>
+        </div>
     </div>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap-select.min.js"></script>
@@ -132,7 +157,7 @@ if (isset($_POST["submit"])) {
     <script src="js/chartData.js"></script>
     <script src="js/main.js"></script>
     <script src="js/sidebar.js"></script>
-	<script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
 
     </script>
 </body>

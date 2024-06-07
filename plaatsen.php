@@ -39,7 +39,7 @@ check_login();
 						</div>
 						<div class="col-md-4 text-end">
 							<?php if (!strlen($_SESSION["admin_id"]) == 0) { ?>
-								<a href="admin/register-plaats.php" class="btn btn-primary">Voeg Plaats Toe</a>
+								<a href="register-plaats.php" class="btn btn-primary">Voeg Plaats Toe</a>
 						</div>
 					<?php } ?>
 					</div>
@@ -54,6 +54,8 @@ check_login();
 												<th>Naam</th>
 												<th>Beschrijving</th>
 												<th>Groot</th>
+												<th>Electriciteit</th>
+												<th>Kosten in €</th>
 												<th>Action</th>
 											</tr>
 										</thead>
@@ -71,12 +73,20 @@ check_login();
 														echo "Yes";
 													} else {
 														echo "No";
-													} ?></td>
+													} ?>
+												</td>
+												<td><?php if ($row->electriciteit === 1) {
+														echo "Yes";
+													} else {
+														echo "No";
+													} ?>
+												</td>
+												<td>€ <?php echo $row->kosten; ?> .-</td>
 
 												<td>
 													<?php if (!strlen($_SESSION["admin_id"]) == 0) { ?>
-														<a href="admin/edit-plaats.php?id=<?php echo $row->ID; ?>" title="Edit">Edit</a>&nbsp;&nbsp;
-														<a href="admin/delete-plaats.php?id=<?php echo $row->ID; ?>" title="Delete">Delete</a>&nbsp;&nbsp;
+														<a href="edit-plaats.php?id=<?php echo $row->ID; ?>" title="Edit">Edit</a>&nbsp;&nbsp;
+														<a href="delete-plaats.php?id=<?php echo $row->ID; ?>" title="Delete">Delete</a>&nbsp;&nbsp;
 													<?php } ?>
 
 												</td>

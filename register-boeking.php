@@ -3,18 +3,26 @@ session_start();
 include "includes/config.php";
 include "includes/checklogin.php";
 check_login();
+
+
+if (!isset($_GET["checkin_datum"]) || !isset($_GET["checkuit_datum"]) || !isset($_GET["plaats_id"])) {
+	header("location:check-availability.php");
+}
+
+
+
 //code for add courses
 if (isset($_POST["submit"])) {
 	$klantID = $_POST["klantID"];
 	$boeking_datum = $_POST["boeking_datum"];
-	$checkin_datum = $_POST["checkin_datum"];
-	$checkuit_datum = $_POST["checkuit_datum"];
+	$checkin_datum = $_GET["checkin_datum"];
+	$checkuit_datum = $_GET["checkuit_datum"];
 	$status = $_POST["status"];
 	$boeking_datumd = date("Y-m-d H:i:s", strtotime($boeking_datum));
 	$checkin_datumd = date("Y-m-d H:i:s", strtotime($checkin_datum));
 	$checkuit_datumd = date("Y-m-d H:i:s", strtotime($checkuit_datum));
 	if (isset($_POST["plaats"]) && isset($_POST["tarieven"])) {
-		$plaats = $_POST["plaats"];
+		$plaats = $_GET["plaats_id"];
 		$query = "SELECT * FROM `plaats_boekingen` INNER JOIN `boekingen` 
 		ON plaats_boekingen.boeking_id = boekingen.boekingID WHERE plaats_id = ? 
 		AND ((checkin_datum < ? 
@@ -141,10 +149,12 @@ if (isset($_POST["submit"])) {
 													<label class="col-sm-2 control-label">Plaats</label>
 
 													<div class="col-sm-8">
-														<select class="form-select" aria-label="Kies plaats" name="plaats">
+														<select class="form-select" aria-label="Kies plaats" name="plaats" readonly>
 															<?php
-															$ret = "select ID, naam from plaatsen";
+															$plaats_id = $_GET["plaats_id"];
+															$ret = "select ID, naam from plaatsen WHERE ID = ?";
 															$stmt = $conn->prepare($ret);
+															$stmt->bind_param("i", $plaats_id );
 															$stmt->execute();
 															$res = $stmt->get_result();
 															while ($row = $res->fetch_object()) { ?>
@@ -161,7 +171,7 @@ if (isset($_POST["submit"])) {
 													<label class="col-sm-2 control-label">Klant</label>
 
 													<div class="col-sm-8">
-														<select class="form-select" aria-label="Kies Klant" name="klantID">
+														<select class="form-select" aria-label="Kies Klant" name="klantID" required>
 															<?php
 															$ret = "select klantID, naam from klant";
 															$stmt = $conn->prepare($ret);
@@ -177,23 +187,25 @@ if (isset($_POST["submit"])) {
 
 													</div>
 												</div>
+												
 												<div class="form-group">
 													<label class="col-sm-2 control-label">Boeking Datum</label>
 													<div class="col-sm-8">
-														<input type="datetime-local" class="form-control" name="boeking_datum">
+														<input type="datetime-local" class="form-control" name="boeking_datum" required>
 													</div>
 												</div>
 												<div class="form-group">
+													
 													<label class="col-sm-2 control-label">Check in Datum</label>
 													<div class="col-sm-8">
-														<input type="datetime-local" class="form-control" name="checkin_datum">
+														<input type="datetime-local" class="form-control" name="checkin_datum" value="<?php echo $_GET["checkin_datum"]?>" readonly>
 													</div>
 												</div>
 
 												<div class="form-group">
-													<label class="col-sm-2 control-label">Check out datum</label>
+													<label class="col-sm-2 control-label">Check Uit datum</label>
 													<div class="col-sm-8">
-														<input type="datetime-local" class="form-control" name="checkuit_datum">
+														<input type="datetime-local" class="form-control" name="checkuit_datum" value="<?php echo $_GET["checkuit_datum"]?>" readonly>
 													</div>
 												</div>
 

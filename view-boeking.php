@@ -156,44 +156,11 @@ if (isset($_POST["submit"])) {
                                                 <dd class="col-sm-9">
                                                     <?php echo $row->checkuit_datum; ?>
                                                 </dd>
-                                                <dt class="col-sm-3">Kosten</dt>
-                                                <dd class="col-sm-9">
-
-                                                    <dl class="row">
-                                                        <?php
-                                                        $query = "SELECT tarieven.beschrijving, tarieven.kosten FROM tarieven 
-                                                    INNER JOIN boeking_tarieven ON tarieven.ID = boeking_tarieven.tariefID 
-                                                    WHERE boeking_tarieven.boekingID = ?";
-                                                        $stmt = $conn->prepare($query);
-                                                        $stmt->bind_param("i", $boekingID);
-                                                        $stmt->execute();
-                                                        $res = $stmt->get_result();
-                                                        $total = 0;
-                                                        while ($kosten = $res->fetch_object()) {
-                                                        ?>
-                                                            <dt class="col-sm-3">Beschrijving</dt>
-                                                            <dd class="col-sm-9">
-                                                                <?php echo $kosten->beschrijving; ?>
-                                                            </dd>
-                                                            <dt class="col-sm-3">Kosten</dt>
-                                                            <dd class="col-sm-9">
-                                                                €<?php echo $kosten->kosten; ?>
-                                                            </dd>
-                                                        <?php
-                                                            $total += $kosten->kosten;
-                                                        }
-
-                                                        ?>
-                                                        <dt class="col-sm-3">Totaal</dt>
-                                                        <dd class="col-sm-9">
-                                                            €<?php echo $total; ?>
-                                                    </dl>
-                                                </dd>
                                                 <dt class="col-sm-3">Plaats informatie</dt>
                                                 <dd class="col-sm-9">
                                                     <dl class="row">
                                                         <?php
-                                                        $query = "SELECT naam FROM plaatsen WHERE ID=?";
+                                                        $query = "SELECT * FROM plaatsen WHERE ID=?";
                                                         $stmt = $conn->prepare($query);
                                                         $stmt->bind_param("i", $row->plaats_id);
                                                         $stmt->execute();
@@ -212,6 +179,18 @@ if (isset($_POST["submit"])) {
                                                             } else {
                                                                 echo "No";
                                                             }  ?>
+                                                        </dd>
+                                                        <dt class="col-sm-3">Electriciteit</dt>
+                                                        <dd class="col-sm-9">
+                                                            <?php if ($plaats->Electriciteit === 1) {
+                                                                echo "Yes";
+                                                            } else {
+                                                                echo "No";
+                                                            }  ?>
+                                                        </dd>
+                                                        <dt class="col-sm-3">Kosten plaats per dag </dt>
+                                                        <dd class="col-sm-9">
+                                                            €<?php echo $plaats->kosten; ?>
                                                         </dd>
 
                                                     </dl>
@@ -245,6 +224,62 @@ if (isset($_POST["submit"])) {
                                                             <?php echo $klant->adres; ?>
                                                         </dd>
                                                     </dl>
+
+                                                </dd>
+
+                                                <dt class="col-sm-3">Kosten over Verblijf</dt>
+                                                <dd>
+                                                <dt class="col-sm-3">Tarieven Per dag</dt>
+                                                <dd class="col-sm-9">
+
+                                                    <dl class="row">
+                                                        <?php
+                                                        $query = "SELECT tarieven.beschrijving, tarieven.kosten FROM tarieven 
+                                                    INNER JOIN boeking_tarieven ON tarieven.ID = boeking_tarieven.tariefID 
+                                                    WHERE boeking_tarieven.boekingID = ?";
+                                                        $stmt = $conn->prepare($query);
+                                                        $stmt->bind_param("i", $boekingID);
+                                                        $stmt->execute();
+                                                        $res = $stmt->get_result();
+                                                        $daily_cost = 0;
+                                                        while ($kosten = $res->fetch_object()) {
+                                                        ?>
+                                                            <dt class="col-sm-3">Beschrijving</dt>
+                                                            <dd class="col-sm-9">
+                                                                <?php echo $kosten->beschrijving; ?>
+                                                            </dd>
+                                                            <dt class="col-sm-3">Kosten</dt>
+                                                            <dd class="col-sm-9">
+                                                                €<?php echo $kosten->kosten; ?>
+                                                            </dd>
+                                                        <?php
+                                                            $daily_cost += $kosten->kosten;
+                                                        }
+
+                                                        ?>
+                                                        <dt class="col-sm-3">Totaal kosten per dag</dt>
+                                                        <dd class="col-sm-9">
+                                                            
+                                                            €<?php $checkin = new DateTime($row->checkin_datum);
+                                                                $checkout = new DateTime($row->checkuit_datum);
+                                                                $interval = $checkin->diff($checkout);
+
+                                                                $total_days = $interval->days;
+                                                                $total_cost = $total_days * $daily_cost;
+                                                                echo $daily_cost
+                                                                ?>
+                                                        </dd>
+                                                    </dl>
+                                                </dd>
+                                                <dt class="col-sm-3">Totaal kosten over verblijf</dt>
+                                                <dd class="col-sm-9">
+                                                    €<?php $total_plaats = $plaats->kosten * $total_days;
+                                                        echo $total_cost + $total_plaats; ?>
+                                                         (Tarieven €<?php echo $total_cost ?> + Plaats kosten €<?php echo $total_plaats?>)
+                                                </dd>
+                                                </dd>
+
+
                                             </dl>
 
                                         <?php }
