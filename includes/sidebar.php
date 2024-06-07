@@ -11,6 +11,7 @@
 			<li class="nav-item"><a class="nav-link link-dark" href="tarieven.php"><i class="fa fa-desktop"></i>Tarieven</a></li>
 			<li class="nav-item"><a class="nav-link link-dark" href="klanten.php"><i class="fa fa-desktop"></i>klanten</a></li>
 			<li class="nav-item"><a class="nav-link link-dark" href="boekingen.php"><i class="fa fa-desktop"></i>Boekingen</a></li>
+			<li class="nav-item"><a class="nav-link link-dark" href="plaatsen.php"><i class="fa fa-desktop"></i>Plaatsen</a></li>
 
 		<?php } elseif (isset($_SESSION["id"])) { ?>
 			<li><a class="nav-link link-dark" href="dashboard.php"><i class="fa fa-desktop"></i>Dashboard</a></li>

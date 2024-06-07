@@ -34,10 +34,10 @@ check_login();
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-md-8 text-start">
-							<h2 class="page-title" >Boekingen</h2>
+							<h2 class="page-title">Boekingen</h2>
 						</div>
 						<div class="col-md-4 text-end">
-							<a href="register-boeking.php" class="btn btn-primary">Nieuwe Boeking</a>
+							<a href="check-availability.php" class="btn btn-primary">Nieuwe Boeking</a>
 						</div>
 					</div>
 					<div class="row">
@@ -109,19 +109,19 @@ check_login();
 			</main>
 		</div>
 	</div>
-		<!-- Loading Scripts -->
-		<script src="js/jquery.min.js"></script>
-		<script src="js/bootstrap-select.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script src="js/jquery.dataTables.min.js"></script>
-		<script src="js/dataTables.bootstrap.min.js"></script>
-		<script src="js/Chart.min.js"></script>
-		<script src="js/fileinput.js"></script>
-		<script src="js/chartData.js"></script>
-		<script src="js/main.js"></script>
-		<script src="js/sidebar.js"></script>
-		<script src="js/bootstrap.bundle.min.js"></script>
-		
+	<!-- Loading Scripts -->
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap-select.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.dataTables.min.js"></script>
+	<script src="js/dataTables.bootstrap.min.js"></script>
+	<script src="js/Chart.min.js"></script>
+	<script src="js/fileinput.js"></script>
+	<script src="js/chartData.js"></script>
+	<script src="js/main.js"></script>
+	<script src="js/sidebar.js"></script>
+	<script src="js/bootstrap.bundle.min.js"></script>
+
 
 </body>
 
