@@ -150,7 +150,7 @@ include "includes/checklogin.php";
                                                     <?php
                                                     $query = "SELECT tarieven.beschrijving, tarieven.kosten FROM tarieven 
                                                     INNER JOIN boeking_tarieven ON tarieven.id = boeking_tarieven.tarief_id 
-                                                    WHERE boeking_tarieven.boekingID = ?";
+                                                    WHERE boeking_tarieven.boeking_id = ?";
                                                     $stmt = $conn->prepare($query);
                                                     $stmt->bind_param("i", $boekingID);
                                                     $stmt->execute();

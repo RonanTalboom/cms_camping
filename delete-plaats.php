@@ -6,7 +6,7 @@ check_admin_login();
 
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
-    $query = "DELETE FROM plaatsen WHERE ID=?";
+    $query = "DELETE FROM plaatsen WHERE id=?";
     $stmt = $conn->prepare($query);
     $rc = $stmt->bind_param("i", $id);
     $stmt->execute();

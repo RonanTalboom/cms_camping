@@ -5,17 +5,8 @@ include "includes/checklogin.php";
 check_login();
 //code for add courses
 if (isset($_POST["submit"])) {
-    $naam = $_POST["naam"];
-    $email = $_POST["email"];
-    $telefoon = $_POST["telefoon"];
-    $adres = $_POST["adres"];
-    $id = $_GET["id"];
-    $query = "update klant set naam=?,email=?,tel=?,adres=? where klantID=?";
-    $stmt = $conn->prepare($query);
-    $rc = $stmt->bind_param("ssssi", $naam, $email, $telefoon, $adres, $id);
-    $stmt->execute();
-    echo "<script>alert('klant has been Updated successfully');</script>";
-    header("location:klanten.php");
+    
+    header("location:boekingen.php");
 }
 ?>
 <!doctype html>
@@ -39,10 +30,10 @@ if (isset($_POST["submit"])) {
                 $id = $_GET["id"];
                 $ret = "SELECT boekingen.*, klant.naam as klant_naam, plaatsen.naam as plaatsen_naam 
                 FROM boekingen 
-                INNER JOIN klant ON boekingen.klantID = klant.klantID 
-                INNER JOIN plaats_boekingen ON boekingen.boekingID = plaats_boekingen.boeking_id
-                INNER JOIN plaatsen ON plaats_boekingen.plaats_id = plaatsen.ID
-                WHERE boekingen.boekingID = ? ";
+                INNER JOIN klant ON boekingen.klant_id = klant.id 
+                INNER JOIN plaats_boekingen ON boekingen.id = plaats_boekingen.boeking_id
+                INNER JOIN plaatsen ON plaats_boekingen.plaats_id = plaatsen.id
+                WHERE boekingen.id = ? ";
                 $stmt = $conn->prepare($ret);
                 $stmt->bind_param("i", $id);
                 $stmt->execute();
@@ -53,7 +44,7 @@ if (isset($_POST["submit"])) {
                             <label class="label">
                                 <span class="label-text">Plaats</span>
                             </label>
-                            <select class="select select-bordered w-full max-w-xs" aria-label="Kies plaats" name="plaats" readonly>
+                            <select class="select select-bordered w-full max-w-xs" aria-label="plaats" name="plaats" readonly>
 
                                 <option value="<?php echo $row->ID; ?>"><?php echo $row->plaatsen_naam; ?></option>
                             </select>

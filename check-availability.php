@@ -8,22 +8,24 @@ check_login();
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $checkin_datum = $_GET["checkin_datum"];
     $checkuit_datum = $_GET["checkuit_datum"];
-    if (strtotime($checkuit_datum) <= strtotime($checkin_datum)) {
-        echo "<script>alert('Check-uit date should be greater than check-in date');</script>";
-    } else {
+    if (isset($_GET["checkin_datum"]) && isset($_GET["checkuit_datum"])) {
+        if (strtotime($checkuit_datum) <= strtotime($checkin_datum)) {
+            echo "<script>alert('Check-uit date should be greater than check-in date');</script>";
+        } else {
 
-        $query = "SELECT * FROM plaatsen WHERE id NOT IN (
+            $query = "SELECT * FROM plaatsen WHERE id NOT IN (
         SELECT plaats_id FROM plaats_boekingen 
         INNER JOIN boekingen ON plaats_boekingen.boeking_id = boekingen.id 
         WHERE (checkin_datum <= ? AND checkuit_datum >= ?) 
         OR (checkin_datum < ? AND checkuit_datum > ?) 
         OR (checkin_datum > ? AND checkuit_datum < ?)
     )";
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param("ssssss", $checkuit_datum, $checkin_datum, $checkuit_datum, $checkin_datum, $checkin_datum, $checkuit_datum);
-        $stmt->execute();
-        $res = $stmt->get_result();
-        $available_plaatsen = $res->fetch_all(MYSQLI_ASSOC);
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param("ssssss", $checkuit_datum, $checkin_datum, $checkuit_datum, $checkin_datum, $checkin_datum, $checkuit_datum);
+            $stmt->execute();
+            $res = $stmt->get_result();
+            $available_plaatsen = $res->fetch_all(MYSQLI_ASSOC);
+        }
     }
 }
 
