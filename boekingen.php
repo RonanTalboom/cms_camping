@@ -5,16 +5,14 @@ include "includes/checklogin.php";
 check_login();
 ?>
 <!doctype html>
-<html lang="en" class="no-js">
+<html>
 
 <head>
-	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 	<title>CAMPING</title>
-	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="css/signin.css">
 	<link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+	<script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
@@ -84,19 +82,19 @@ check_login();
 						?>
 					</tbody>
 				</table>
-				<nav class="flex items-center justify-between p-4">
-					<ul class="pagination">
-						<li class="page-item <?= $page == 1 ? 'disabled' : '' ?>"><a href="?page=<?= max(1, $page - 1) ?>" class="page-link">Previous</a></li>
+				<nav class="flex justify-end p-4">
+					<div class="join">
+						<button class="join-item btn<?= $page == 1 ? ' btn-disabled' : '' ?>"><a href="?page=<?= max(1, $page - 1) ?>">Previous</a></button>
 						<?php for ($i = 1; $i <= $total_pages; $i++) : ?>
-							<li class="page-item <?= $page == $i ? 'active' : '' ?>"><a href="?page=<?= $i ?>" class="page-link"><?= $i ?></a></li>
+							<button class="join-item btn<?= $page == $i ? ' btn-active' : '' ?>"><a href="?page=<?= $i ?>"><?= $i ?></a></button>
 						<?php endfor; ?>
-						<li class="page-item <?= $page == $total_pages ? 'disabled' : '' ?>"><a href="?page=<?= min($total_pages, $page + 1) ?>" class="page-link">Next</a></li>
-					</ul>
+						<button class="join-item btn<?= $page == $total_pages ? ' btn-disabled' : '' ?>"><a href="?page=<?= min($total_pages, $page + 1) ?>">Next</a></button>
+					</div>
 				</nav>
 			</div>
 		</main>
 	</div>
 
 </body>
-<script src="https://cdn.tailwindcss.com"></script>
+
 </html>
