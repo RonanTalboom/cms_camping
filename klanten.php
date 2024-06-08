@@ -54,7 +54,7 @@ check_login();
 							<td><?php echo $row->id; ?></td>
 							<td><?php echo $row->naam; ?></td>
 							<td><?php echo $row->email; ?></td>
-							<td><?php echo $row->tel; ?></td>
+							<td><?php echo $row->telefoon; ?></td>
 							<td><?php echo $row->adres; ?></td>
 
 							<td>

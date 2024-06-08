@@ -6,12 +6,12 @@ check_login();
 
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
-    $query = "DELETE FROM boekingen WHERE boekingID=?";
+    $query = "DELETE FROM boekingen WHERE id=?";
     $stmt = $conn->prepare($query);
     $rc = $stmt->bind_param("i", $id);
     $stmt->execute();
     
-    $query = "DELETE FROM boeking_tarieven WHERE boekingID=?";
+    $query = "DELETE FROM boeking_tarieven WHERE id=?";
     $stmt = $conn->prepare($query);
     $rc = $stmt->bind_param("i", $id);
     $stmt->execute();

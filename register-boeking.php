@@ -64,11 +64,11 @@ if (isset($_POST["submit"])) {
 			$stmt->execute();
 			$boekingID = $conn->insert_id;
 
-			$query = "SELECT kosten FROM `plaatsen` WHERE id=?";
+			$query = "SELECT * FROM `plaatsen` WHERE id=?";
 			$stmt = $conn->prepare($query);
 			$rc = $stmt->bind_param(
 				"i",
-				$plaats_id,
+				$plaats,
 			);
 			$stmt->execute();
 			$res = $stmt->get_result();
