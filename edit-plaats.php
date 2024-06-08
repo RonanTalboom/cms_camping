@@ -2,7 +2,7 @@
 session_start();
 include "includes/config.php";
 include "includes/checklogin.php";
-check_admin_login();
+check_login();
 
 if (isset($_POST["submit"])) {
     $beschrijving = $_POST["beschrijving"];

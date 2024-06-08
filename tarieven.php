@@ -46,13 +46,13 @@ check_admin_login();
 						$stmt->execute(); //ok
 						$res = $stmt->get_result();
 						while ($row = $res->fetch_object()) { ?>
-							<td><?php echo $row->ID; ?></td>
+							<td><?php echo $row->id; ?></td>
 							<td><?php echo $row->beschrijving; ?></td>
 							<td>€ <?php echo $row->kosten; ?> .-</td>
 
 							<td>
-								<a href="edit-tarief.php?id=<?php echo $row->ID; ?>" title="Edit">Edit</a>&nbsp;&nbsp;
-								<a href="delete-tarief.php?id=<?php echo $row->ID; ?>" title="Delete">Delete</a>&nbsp;&nbsp;
+								<a href="edit-tarief.php?id=<?php echo $row->id; ?>" title="Edit">Edit</a>&nbsp;&nbsp;
+								<a href="delete-tarief.php?id=<?php echo $row->id; ?>" title="Delete">Delete</a>&nbsp;&nbsp;
 							</td>
 							</tr>
 						<?php }

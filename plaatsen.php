@@ -49,7 +49,7 @@ check_login();
 						$stmt->execute(); //ok
 						$res = $stmt->get_result();
 						while ($row = $res->fetch_object()) { ?>
-							<td><?php echo $row->ID; ?></td>
+							<td><?php echo $row->id; ?></td>
 							<td><?php echo $row->naam; ?></td>
 							<td><?php echo $row->beschrijving; ?></td>
 							<td><?php if ($row->groot === 1) {
@@ -67,9 +67,9 @@ check_login();
 							<td>€ <?php echo $row->kosten; ?> .-</td>
 
 							<td>
+								<a href="edit-plaats.php?id=<?php echo $row->id; ?>" title="Edit">Edit</a>&nbsp;&nbsp;
 								<?php if (!strlen($_SESSION["admin_id"]) == 0) { ?>
-									<a href="edit-plaats.php?id=<?php echo $row->ID; ?>" title="Edit">Edit</a>&nbsp;&nbsp;
-									<a href="delete-plaats.php?id=<?php echo $row->ID; ?>" title="Delete">Delete</a>&nbsp;&nbsp;
+									<a href="delete-plaats.php?id=<?php echo $row->id; ?>" title="Delete">Delete</a>&nbsp;&nbsp;
 								<?php } ?>
 
 							</td>

@@ -51,15 +51,15 @@ check_login();
 						$stmt->execute(); //ok
 						$res = $stmt->get_result();
 						while ($row = $res->fetch_object()) { ?>
-							<td><?php echo $row->klantID; ?></td>
+							<td><?php echo $row->id; ?></td>
 							<td><?php echo $row->naam; ?></td>
 							<td><?php echo $row->email; ?></td>
 							<td><?php echo $row->tel; ?></td>
 							<td><?php echo $row->adres; ?></td>
 
 							<td>
-								<a href="edit-klant.php?id=<?php echo $row->klantID; ?>" title="Edit">Edit</a>&nbsp;&nbsp;
-								<a href="delete-klant.php?id=<?php echo $row->klantID; ?>" title="Delete">Delete</a>&nbsp;&nbsp;
+								<a href="edit-klant.php?id=<?php echo $row->id; ?>" title="Edit">Edit</a>&nbsp;&nbsp;
+								<a href="delete-klant.php?id=<?php echo $row->id; ?>" title="Delete">Delete</a>&nbsp;&nbsp;
 							</td>
 							</tr>
 						<?php }

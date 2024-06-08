@@ -49,7 +49,7 @@ check_admin_login();
 						$stmt->execute(); //ok
 						$res = $stmt->get_result();
 						while ($row = $res->fetch_object()) { ?>
-							<td><?php echo $row->medewerkerID; ?></td>
+							<td><?php echo $row->id; ?></td>
 							<td><?php echo $row->naam; ?></td>
 							<td><?php echo $row->email; ?></td>
 							<td><?php echo $row->telefoon; ?></td>
@@ -60,8 +60,8 @@ check_admin_login();
 								} ?></td>
 
 							<td>
-								<a href="edit-medewerker.php?id=<?php echo $row->medewerkerID; ?>" title="Edit">Edit</a>&nbsp;&nbsp;
-								<a href="delete-medewerker.php?id=<?php echo $row->medewerkerID; ?>" title="Delete">Delete</a>&nbsp;&nbsp;
+								<a href="edit-medewerker.php?id=<?php echo $row->id; ?>" title="Edit">Edit</a>&nbsp;&nbsp;
+								<a href="delete-medewerker.php?id=<?php echo $row->id; ?>" title="Delete">Delete</a>&nbsp;&nbsp;
 							</td>
 							</tr>
 						<?php }

@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$email = $_POST['email'];
 	$password = $_POST['password'];
 	// Prepare SQL statement to prevent SQL injection
-	$stmt = $conn->prepare("SELECT medewerkerID, manager FROM medewerkers WHERE email = ? AND wachtwoord = ?");
+	$stmt = $conn->prepare("SELECT id, manager FROM medewerkers WHERE email = ? AND wachtwoord = ?");
 	$stmt->bind_param("ss", $email, $password);
 
 	$stmt->execute(); // Execute the query
@@ -31,7 +31,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		// Authentication failed, display an error message
 		$error = "Invalid email or password";
 	}
-	// Close statement
 	$stmt->close();
 }
 ?>
