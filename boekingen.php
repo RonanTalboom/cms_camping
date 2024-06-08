@@ -34,7 +34,6 @@ check_login();
 							<th>Boeking Datum</th>
 							<th>Check in Tijd</th>
 							<th>Check uit Tijd</th>
-							<th>status</th>
 							<th>Open</th>
 							<th>Action</th>
 						</tr>
@@ -45,7 +44,7 @@ check_login();
 						$page = isset($_GET['page']) ? $_GET['page'] : 1; // current page
 						$start = ($page - 1) * $limit; // calculate the start of the results
 
-						$ret = "SELECT boekingen.*, klant.naam as naam FROM boekingen INNER JOIN klant ON boekingen.klant_id = klant.id LIMIT $start, $limit";
+						$ret = "SELECT boekingen.*, klant.naam as naam FROM boekingen INNER JOIN klant ON boekingen.klant_id = klant.id ORDER BY boekingen.id ASC LIMIT $start, $limit";
 						$stmt = $conn->prepare($ret);
 						$stmt->execute();
 						$res = $stmt->get_result();
@@ -55,7 +54,6 @@ check_login();
 							<td><?php echo $row->boeking_datum; ?></td>
 							<td><?php echo $row->checkin_datum; ?></td>
 							<td><?php echo $row->checkuit_datum; ?></td>
-							<td><?php echo $row->status; ?></td>
 							<td>
 								<?php $checkuit_datum = new DateTime($row->checkuit_datum); // assuming $row->checkuit_datum is the check-out date from your database
 								$now = new DateTime();

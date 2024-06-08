@@ -17,7 +17,6 @@ if (isset($_POST["submit"])) {
 	$boeking_datum = $_POST["boeking_datum"];
 	$checkin_datum = $_GET["checkin_datum"];
 	$checkuit_datum = $_GET["checkuit_datum"];
-	$status = $_POST["status"];
 	$boeking_datumd = date("Y-m-d H:i:s", strtotime($boeking_datum));
 	$checkin_datumd = date("Y-m-d H:i:s", strtotime($checkin_datum));
 	$checkuit_datumd = date("Y-m-d H:i:s", strtotime($checkuit_datum));
@@ -56,7 +55,7 @@ if (isset($_POST["submit"])) {
 				"INSERT INTO `boekingen`(`klant_id`,`boeking_datum`, `checkin_datum`, `checkuit_datum`) VALUES (?,?,?,?)";
 			$stmt = $conn->prepare($query);
 			$rc = $stmt->bind_param(
-				"issss",
+				"isss",
 				$klantID,
 				$boeking_datumd,
 				$checkin_datumd,
@@ -64,16 +63,28 @@ if (isset($_POST["submit"])) {
 			);
 			$stmt->execute();
 			$boekingID = $conn->insert_id;
-			$query = "INSERT INTO `plaats_boekingen`(`plaats_id`, `boeking_id`, `boeking_id`) VALUES (?,?,?)";
+
+			$query = "SELECT kosten FROM `plaatsen` WHERE id=?";
 			$stmt = $conn->prepare($query);
-			$stmt->bind_param(
-				"ii",
-				$plaats,
-				$boekingID,
+			$rc = $stmt->bind_param(
+				"i",
+				$plaats_id,
 			);
 			$stmt->execute();
+			$res = $stmt->get_result();
+			while ($row = $res->fetch_object()) {
+				$query = "INSERT INTO `plaats_boekingen`(`plaats_id`, `boeking_id`, `kosten`) VALUES (?,?,?)";
+				$stmt = $conn->prepare($query);
+				$stmt->bind_param(
+					"iid",
+					$plaats,
+					$boekingID,
+					$row->kosten
+				);
+				$stmt->execute();
+			}
 			foreach ($_POST["tarieven"] as $tarief) {
-				$query = "SELECT kosten FROM `tarieven` WHERE ID=?";
+				$query = "SELECT kosten FROM `tarieven` WHERE id=?";
 				$stmt = $conn->prepare($query);
 				$rc = $stmt->bind_param(
 					"i",
@@ -128,7 +139,7 @@ if (isset($_POST["submit"])) {
 							$stmt->execute();
 							$res = $stmt->get_result();
 							while ($row = $res->fetch_object()) { ?>
-								<option value="<?php echo $row->ID; ?>"><?php echo $row->naam; ?></option>
+								<option value="<?php echo $row->id; ?>"><?php echo $row->naam; ?></option>
 							<?php }
 							?>
 						</select>
@@ -145,7 +156,7 @@ if (isset($_POST["submit"])) {
 							$stmt->execute();
 							$res = $stmt->get_result();
 							while ($row = $res->fetch_object()) { ?>
-								<option value="<?php echo $row->klantID; ?>"><?php echo $row->naam; ?></option>
+								<option value="<?php echo $row->id; ?>"><?php echo $row->naam; ?></option>
 							<?php }
 							?>
 						</select>
@@ -185,7 +196,7 @@ if (isset($_POST["submit"])) {
 								<span class="label-text">
 									<?php echo $row->beschrijving; ?> €<?php echo $row->kosten; ?>
 								</span>
-								<input class="checkbox" type="checkbox" name="tarieven[]" id="tarief-<?php echo $row->ID; ?>" value="<?php echo $row->ID; ?>" />
+								<input class="checkbox" type="checkbox" name="tarieven[]" value="<?php echo $row->id; ?>" />
 							</label>
 						<?php } ?>
 					</div>
