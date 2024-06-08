@@ -45,12 +45,12 @@ check_login();
 						$page = isset($_GET['page']) ? $_GET['page'] : 1; // current page
 						$start = ($page - 1) * $limit; // calculate the start of the results
 
-						$ret = "SELECT * FROM boekingen INNER JOIN klant ON boekingen.klantID = klant.klantID LIMIT $start, $limit";
+						$ret = "SELECT boekingen.*, klant.naam as naam FROM boekingen INNER JOIN klant ON boekingen.klant_id = klant.id LIMIT $start, $limit";
 						$stmt = $conn->prepare($ret);
 						$stmt->execute();
 						$res = $stmt->get_result();
 						while ($row = $res->fetch_object()) { ?>
-							<td><?php echo $row->boekingID; ?></td>
+							<td><?php echo $row->id; ?></td>
 							<td><?php echo $row->naam; ?></td>
 							<td><?php echo $row->boeking_datum; ?></td>
 							<td><?php echo $row->checkin_datum; ?></td>
@@ -67,13 +67,13 @@ check_login();
 								} ?>
 							</td>
 							<td>
-								<a href="view-boeking.php?id=<?php echo $row->boekingID; ?>" title="View">View</a>&nbsp;&nbsp;
-								<a href="edit-boeking.php?id=<?php echo $row->boekingID; ?>" title="Edit">Edit</a>&nbsp;&nbsp;
-								<a href="delete-boeking.php?id=<?php echo $row->boekingID; ?>" title="Delete">Delete</a>&nbsp;&nbsp;
+								<a href="view-boeking.php?id=<?php echo $row->id; ?>" title="View">View</a>&nbsp;&nbsp;
+								<a href="edit-boeking.php?id=<?php echo $row->id; ?>" title="Edit">Edit</a>&nbsp;&nbsp;
+								<a href="delete-boeking.php?id=<?php echo $row->id; ?>" title="Delete">Delete</a>&nbsp;&nbsp;
 							</td>
 							</tr>
 						<?php }
-						$stmt = $conn->prepare("SELECT COUNT(*) FROM boekingen INNER JOIN klant ON boekingen.klantID = klant.klantID");
+						$stmt = $conn->prepare("SELECT COUNT(*) FROM boekingen INNER JOIN klant ON boekingen.klant_id = klant.id");
 						$stmt->execute();
 						$total_rows = $stmt->get_result()->fetch_row()[0];
 
