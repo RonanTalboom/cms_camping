@@ -30,7 +30,7 @@
 		$_SESSION["admin_id"]
 	) { ?>
 		<a href="#" class="flex items-center">
-			<img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-full me-2">
+			<img src="https://github.com/Nichaela.png" alt="" width="32" height="32" class="rounded-full me-2">
 			<div class="flex flex-col">
 				<strong class="text-black no-underline"><?php echo $_SESSION["email"] ?></strong>
 				<?php if (isset($_SESSION["admin_id"])) { ?>
