@@ -10,11 +10,11 @@ if (isset($_POST["submit"])) {
 	$adres = $_POST["adres"];
 
 	$query =
-		"INSERT INTO `klant`(`naam`, `email`, `tel`, `adres`) VALUES (?,?,?,?)";
+		"INSERT INTO `klant`(`naam`, `email`, `telefoon`, `adres`) VALUES (?,?,?,?)";
 	$stmt = $conn->prepare($query);
 	$rc = $stmt->bind_param("ssss", $naam, $email, $telefoon, $adres);
 	$stmt->execute();
-	echo "<script>alert('medewerker has been created');</script>";
+	echo "<script>alert('Klant has been created');</script>";
 	header("location:klanten.php");
 }
 ?>

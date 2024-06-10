@@ -5,7 +5,30 @@ include "includes/checklogin.php";
 check_login();
 //code for add courses
 if (isset($_POST["submit"])) {
-    
+    $id = $_GET["id"];
+    $tarieven = $_POST["tarieven"];
+    // Delete old tarieven
+    $query = "DELETE FROM boeking_tarieven WHERE boeking_id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param('i', $id);
+    $stmt->execute();
+
+    // Insert new tarieven
+    $query = "INSERT INTO boeking_tarieven (boeking_id, tarief_id, kosten) VALUES (?, ?, ?)";
+    $stmt = $conn->prepare($query);
+    foreach ($tarieven as $tarief_id) {
+         // Fetch kosten for the tarief
+         $query_kosten = "SELECT kosten FROM tarieven WHERE id = ?";
+         $stmt_kosten = $conn->prepare($query_kosten);
+         $stmt_kosten->bind_param('i', $tarief_id);
+         $stmt_kosten->execute();
+         $result_kosten = $stmt_kosten->get_result();
+         $kosten = $result_kosten->fetch_object()->kosten;
+ 
+         $stmt->bind_param('iii', $id, $tarief_id, $kosten);
+         $stmt->execute();
+    }
+
     header("location:boekingen.php");
 }
 ?>
@@ -79,34 +102,37 @@ if (isset($_POST["submit"])) {
                             <input type="datetime-local" class="input input-bordered" name="checkuit_datum" value="<?php echo $row->checkuit_datum; ?>" readonly>
                         </div>
 
-                        <div class="form-control">
-                            <label class="label">
-                                <span class="label-text">Status</span>
-                            </label>
-                            <select class="select select-bordered w-full max-w-xs" aria-label="Kies Status" name="status" required>
-                                <option value="0">Bevestigd</option>
-                                <option value="1">In afwachting</option>
-                                <option value="2">Geannuleerd</option>
-                            </select>
+                        <?php
+                        // Fetch selected tarieven ids
+                        $query = "SELECT tarief_id FROM boeking_tarieven WHERE boeking_id = ?";
+                        $stmt = $conn->prepare($query);
+                        $stmt->bind_param('i', $id);
+                        $stmt->execute();
+                        $result = $stmt->get_result();
+                        $selected_tarieven = array();
+                        while ($tarief = $result->fetch_object()) {
+                            $selected_tarieven[] = $tarief->tarief_id;
+                        }
 
-                        </div>
+                        // Fetch all tarieven
+                        $query = "SELECT * FROM tarieven";
+                        $stmt = $conn->prepare($query);
+                        $stmt->execute();
+                        $tarieven = $stmt->get_result();
+                        ?>
+
+                        <!-- Your form fields -->
 
                         <div class="form-control">
                             <label class="label">
                                 <span class="label-text">Kosten</span>
                             </label>
-                            <?php
-                            $ret = "select * from tarieven";
-                            $stmt = $conn->prepare($ret);
-                            $stmt->execute();
-                            $res = $stmt->get_result();
-                            while ($row = $res->fetch_object()) { ?>
+                            <?php while ($tarief = $tarieven->fetch_object()) { ?>
                                 <label class="label">
-
                                     <span class="label-text">
-                                        <?php echo $row->beschrijving; ?> €<?php echo $row->kosten; ?>
+                                        <?php echo $tarief->beschrijving; ?> €<?php echo $tarief->kosten; ?>
                                     </span>
-                                    <input class="checkbox" type="checkbox" name="tarieven[]" id="tarief-<?php echo $row->ID; ?>" value="<?php echo $row->ID; ?>" />
+                                    <input class="checkbox" type="checkbox" name="tarieven[]" id="tarief-<?php echo $tarief->id; ?>" value="<?php echo $tarief->id; ?>" <?php echo in_array($tarief->id, $selected_tarieven) ? 'checked' : ''; ?> />
                                 </label>
                             <?php } ?>
                         </div>
