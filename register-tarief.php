@@ -38,7 +38,6 @@ if (isset($_POST["submit"])) {
         <?php include "includes/sidebar.php"; ?>
         <main class="flex-1 p-6 overflow-y-auto" style="height: 100vh;">
 
-            <h2 class="page-title">Nieuw Tarief </h2>
             <form method="post" class="form-horizontal">
 
                 <div class="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md flex flex-col space-y-4">
