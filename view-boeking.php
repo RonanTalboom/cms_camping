@@ -6,7 +6,7 @@ include "includes/checklogin.php";
 
 ?>
 <!doctype html>
-<html lang="en" class="no-js">
+<html lang="en" data-theme="lemonade">
 
 <head>
     <meta charset="UTF-8">
