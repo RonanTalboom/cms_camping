@@ -29,7 +29,7 @@
 		$_SESSION["id"] ||
 		$_SESSION["admin_id"]
 	) { ?>
-		<a href="#" class="flex items-center">
+		<a href="#" class="flex items-center overflow-hidden">
 			<img src="https://github.com/Nichaela.png" alt="" width="32" height="32" class="rounded-full me-2">
 			<div class="flex flex-col">
 				<strong class="text-black no-underline"><?php echo $_SESSION["email"] ?></strong>
