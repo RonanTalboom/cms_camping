@@ -11,7 +11,7 @@ if (isset($_GET["id"])) {
     $rc = $stmt->bind_param("i", $id);
     $stmt->execute();
     
-    $query = "DELETE FROM boeking_tarieven WHERE id=?";
+    $query = "DELETE FROM boeking_tarieven WHERE boeking_id=?";
     $stmt = $conn->prepare($query);
     $rc = $stmt->bind_param("i", $id);
     $stmt->execute();
