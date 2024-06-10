@@ -44,7 +44,7 @@ if (isset($_POST["submit"])) {
 <body>
     <div class="flex min-h-screen">
         <?php include "includes/sidebar.php"; ?>
-        <main class="flex-1 p-6">
+        <main class="flex-1 p-6 overflow-y-auto" style="height: 100vh;">
 
             <form method="post" class="form-horizontal">
                 <?php

@@ -52,7 +52,7 @@ $data = array_values($costsPerDay);
 	<div class="flex min-h-screen">
 
 		<?php include "includes/sidebar.php"; ?>
-		<main class="flex-1 p-6">
+		<main class="flex-1 p-6 overflow-y-auto" style="height: 100vh;">
 			<div class="flex min-h-screen">
 				<canvas id="myChart"></canvas>
 			</div>

@@ -18,15 +18,14 @@ check_login();
 <body>
 	<div class="flex min-h-screen">
 		<?php include "includes/sidebar.php"; ?>
-		<main class="flex-1 p-6">
+		<main class="flex-1 p-6 overflow-y-auto" style="height: 100vh;">
 			<div class="container mx-auto">
 				<div class="flex justify-between items-center">
-					<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="search" type="text" placeholder="Search">
+					<h2 class="text-2xl font-bold">Boekingen</h2>
 					<a href="check-availability.php" class="btn btn-primary">Nieuwe Boeking</a>
 				</div>
-				<h2 class="text-2xl font-bold">Boekingen</h2>
 
-				<table class="table w-full mt-4">
+				<table class="table w-full mt-4 overflow-x-auto">
 					<thead>
 						<tr>
 							<th>#</th>
@@ -40,11 +39,8 @@ check_login();
 					</thead>
 					<tbody>
 						<?php
-						$limit = 10; // number of rows to show per page
-						$page = isset($_GET['page']) ? $_GET['page'] : 1; // current page
-						$start = ($page - 1) * $limit; // calculate the start of the results
 
-						$ret = "SELECT boekingen.*, klant.naam as naam FROM boekingen INNER JOIN klant ON boekingen.klant_id = klant.id ORDER BY boekingen.id ASC LIMIT $start, $limit";
+						$ret = "SELECT boekingen.*, klant.naam as naam FROM boekingen INNER JOIN klant ON boekingen.klant_id = klant.id ORDER BY boekingen.id ASC ";
 						$stmt = $conn->prepare($ret);
 						$stmt->execute();
 						$res = $stmt->get_result();
@@ -80,15 +76,6 @@ check_login();
 						?>
 					</tbody>
 				</table>
-				<nav class="flex justify-end p-4">
-					<div class="join">
-						<button class="join-item btn<?= $page == 1 ? ' btn-disabled' : '' ?>"><a href="?page=<?= max(1, $page - 1) ?>">Previous</a></button>
-						<?php for ($i = 1; $i <= $total_pages; $i++) : ?>
-							<button class="join-item btn<?= $page == $i ? ' btn-active' : '' ?>"><a href="?page=<?= $i ?>"><?= $i ?></a></button>
-						<?php endfor; ?>
-						<button class="join-item btn<?= $page == $total_pages ? ' btn-disabled' : '' ?>"><a href="?page=<?= min($total_pages, $page + 1) ?>">Next</a></button>
-					</div>
-				</nav>
 			</div>
 		</main>
 	</div>
