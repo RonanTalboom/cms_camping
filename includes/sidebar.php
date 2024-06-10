@@ -1,4 +1,10 @@
-<nav class="w-64 bg-base-200 p-4 flex flex-col">
+
+<button id="hamburger" class="lg:hidden p-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50" style="position: fixed; top: 0; left: 0;">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+    </svg>
+</button>
+<nav id="sidebar" class="w-64 bg-base-200 p-4 flex flex-col lg:block hidden lg:flex" style="max-height: 100vh;">
 	<h2 class="text-xl font-bold mb-4">Dashboard</h2>
 	<ul class="menu flex-grow">
 		<li class="menu-title">
@@ -40,3 +46,9 @@
 	<?php } ?>
 
 </nav>
+<script>
+	document.getElementById('hamburger').addEventListener('click', function() {
+    var sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('hidden');
+});
+</script>

@@ -22,15 +22,14 @@ check_login();
 <body>
 	<div class="flex min-h-screen">
 		<?php include "includes/sidebar.php"; ?>
-		<main class="flex-1 p-6">
+		<main class="flex-1 p-6 overflow-y-auto" style="height: 100vh;">
 			<div class="container mx-auto">
 				<div class="flex justify-between items-center">
-					<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="search" type="text" placeholder="Search">
+				<h2 class="text-2xl font-bold">Plaatsen</h2>
 					<a href="register-plaats.php" class="btn btn-primary">Voeg Plaats Toe</a>
 				</div>
-				<h2 class="text-2xl font-bold">Plaatsen</h2>
 
-				<table class="table w-full mt-4">
+				<table class="table w-full mt-4 overflow-x-auto">
 					<thead>
 						<tr>
 							<th>#</th>

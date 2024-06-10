@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 <body>
     <div class="flex min-h-screen">
         <?php include "includes/sidebar.php"; ?>
-        <main class="flex-1 p-6">
+        <main class="flex-1 p-6 overflow-y-auto" style="height: 100vh;">
             <form method="get" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md flex flex-col space-y-4">
                 <div class="form-control">
                     <label for="checkin_date" class="label"><span class="label-text">Check-in Date:</span></label>
