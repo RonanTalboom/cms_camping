@@ -6,7 +6,7 @@ check_login();
 
 if (isset($_GET["id"])) {
     $klant_id = $_GET["id"];
-    
+
     $query = "SELECT * FROM boekingen WHERE klant_id=?";
     $stmt = $conn->prepare($query);
     $rc = $stmt->bind_param("i", $klant_id);
@@ -19,12 +19,12 @@ if (isset($_GET["id"])) {
             $stmt = $conn->prepare($query);
             $rc = $stmt->bind_param("i", $id);
             $stmt->execute();
-            
-            $query = "DELETE FROM boeking_tarieven WHERE id=?";
+
+            $query = "DELETE FROM boeking_tarieven WHERE boeking_id=?";
             $stmt = $conn->prepare($query);
             $rc = $stmt->bind_param("i", $id);
             $stmt->execute();
-        
+
             $query = "DELETE FROM plaats_boekingen WHERE boeking_id=?";
             $stmt = $conn->prepare($query);
             $rc = $stmt->bind_param("i", $id);
@@ -38,5 +38,3 @@ if (isset($_GET["id"])) {
     echo "<script>alert('klant has been Deleted successfully');</script>";
     header("location:klanten.php");
 }
-
-?>
