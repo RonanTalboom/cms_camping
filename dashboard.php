@@ -3,7 +3,10 @@ session_start();
 include "includes/config.php";
 include "includes/checklogin.php";
 check_admin_login();
-$query = "SELECT checkin_datum, checkuit_datum, kosten FROM boekingen INNER JOIN boeking_tarieven ON boekingen.id = boeking_tarieven.boeking_id";
+$query = "SELECT checkin_datum, checkuit_datum, (boeking_tarieven.kosten + plaats_boekingen.kosten) AS kosten
+FROM boekingen 
+INNER JOIN boeking_tarieven ON boekingen.id = boeking_tarieven.boeking_id
+INNER JOIN plaats_boekingen ON boekingen.id = plaats_boekingen.boeking_id";
 $stmt = $conn->prepare($query);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -25,7 +28,7 @@ while ($row = $result->fetch_assoc()) {
 }
 
 $runningTotal = 0;
-ksort($costsPerDay); 
+ksort($costsPerDay);
 foreach ($costsPerDay as $date => $cost) {
 	$runningTotal += $cost;
 	$costsPerDay[$date] = $runningTotal;
@@ -67,7 +70,7 @@ $data = array_values($costsPerDay);
 		data: {
 			labels: JSON.parse('<?php echo json_encode($labels); ?>'),
 			datasets: [{
-				label: 'Total kosten in € (<?php echo $runningTotal; ?>) ',
+				label: 'Total kosten in €',
 				data: JSON.parse('<?php echo json_encode($data); ?>'),
 				backgroundColor: 'rgba(75, 192, 192, 0.2)',
 				borderColor: 'rgba(75, 192, 192, 1)',
