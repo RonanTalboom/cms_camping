@@ -23,6 +23,8 @@
 			<li><a href="klanten.php">Klanten</a></li>
 			<li><a href="plaatsen.php">Plaatsen</a></li>
 
+		<?php } else { ?>
+			<li><a href="login.php">Login</a></li>
 		<?php }  ?>
 	</ul>
 	<?php if (
