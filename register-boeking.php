@@ -10,8 +10,6 @@ if (!isset($_GET["checkin_datum"]) || !isset($_GET["checkuit_datum"]) || !isset(
 }
 
 
-
-//code for add courses
 if (isset($_POST["submit"])) {
 	$klantID = $_POST["klantID"];
 	$boeking_datum = $_POST["boeking_datum"];
@@ -110,7 +108,7 @@ if (isset($_POST["submit"])) {
 }
 ?>
 <!doctype html>
-<html lang="en" class="no-js">
+<html lang="en" data-theme="lemonade">
 
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">

@@ -33,7 +33,7 @@ if (isset($_POST["submit"])) {
 }
 ?>
 <!doctype html>
-<html lang="en" class="no-js">
+<html lang="en" data-theme="lemonade">
 
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

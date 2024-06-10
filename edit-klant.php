@@ -19,7 +19,7 @@ if (isset($_POST["submit"])) {
 }
 ?>
 <!doctype html>
-<html lang="en" class="no-js">
+<html lang="en" data-theme="lemonade">
 
 
 <head>

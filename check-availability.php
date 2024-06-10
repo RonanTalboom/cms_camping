@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
 
 <!doctype html>
-<html>
+<html lang="en" data-theme="lemonade">
 
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

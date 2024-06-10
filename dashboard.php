@@ -36,7 +36,7 @@ $data = array_values($costsPerDay);
 ?>
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="lemonade">
 
 <head>
 	<title>CAMPING</title>
